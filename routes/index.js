@@ -20,7 +20,7 @@ var rand, link;
 
 router.get('/send', middleware.checkEmailVerification, middleware.ensureAuthenticated, (req, res) => {
   rand=Math.floor((Math.random() * 100000) + 54);
-  link="https://"+req.get('host')+"/verify?id="+rand+"&email="+req.user.email;
+  link="http://"+req.get('host')+"/verify?id="+rand+"&email="+req.user.email;
   console.log(link)
   arr = []
   User.findOne({email: req.user.email}, (err, user)=> {
