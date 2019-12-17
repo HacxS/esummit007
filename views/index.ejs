@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ========== Meta Tags ========== -->
+    <meta charset="UTF-8">
+    <meta name="description" content="ESummit">
+    <meta name="keywords" content="ESummit , Event , Html">
+    <meta name="author" content="ESummit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- ========== Title ========== -->
+    <title> ESummit'20</title>
+    <!-- ========== Favicon Ico ========== -->
+    <!--<link rel="icon" href="fav.ico">-->
+    <!-- ========== STYLESHEETS ========== -->
+    <!-- Bootstrap CSS -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Fonts Icon CSS -->
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet">
+    <link href="assets/css/et-line.css" rel="stylesheet">
+    <link href="assets/css/ionicons.min.css" rel="stylesheet">
+    <!-- Carousel CSS -->
+    <link href="assets/css/owl.carousel.min.css" rel="stylesheet">
+    <link href="assets/css/owl.theme.default.min.css" rel="stylesheet">
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="assets/css/animate.min.css">
+    <!-- Custom styles for this template -->
+    <link href="assets/css/main.css" rel="stylesheet">
+</head>
+<body>
+<div class="loader">
+    <div class="loader-outter"></div>
+    <div class="loader-inner"></div>
+</div>
+
+<!--header start here -->
+<header class="header navbar fixed-top navbar-expand-md">
+    <div class="container">
+        <a class="navbar-brand logo" href="#">
+            <img src="assets/img/logo.png" alt="ESummit"/>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#headernav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="lnr lnr-text-align-right"></span>
+        </button>
+        <div class="collapse navbar-collapse flex-sm-row-reverse" id="headernav">
+            <ul class=" nav navbar-nav menu">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="/#Speakers">Speakers</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="/#Events">Events</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="/#Workshops">Workshops</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="/#Contact">Contact</a>
+                </li>
+                <% if(!user){ %>
+                    <li class="nav-item">
+                        <a class="nav-link " href="/register">Register</a>
+                    </li>
+                <% }else{ %>
+                    <li class="nav-item">
+                        <a class="nav-link " href="/dashboard" style="text-decoration: underline;"><%= user.first_name %></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="/logout" style="text-decoration: underline;">Logout</a>
+                    </li>
+                <% } %>   
+                
+
+            </ul>
+        </div>
+    </div>
+</header>
+<!--header end here-->
+<% include ./partials/messages %>
+<!--cover section slider -->
+<section id="home" class="home-cover">
+    <div class="cover_slider owl-carousel owl-theme">
+        <div class="cover_item" style="background: url('assets/img/bg/122.jpg');">
+             <div class="slider_content">
+                <div class="slider-content-inner">
+                    <div class="container">
+                        <div class="slider-content-center">
+                            <img src="assets/img/bg/123.png">
+                            <!--<h2 class="cover-title">
+                                Prepare yourself for the
+                            </h2>
+                            <strong class="cover-xl-text">conference</strong>
+                            <p class="cover-date">
+                                1-2 February 2020  - Varanasi.
+                            </p>
+                            <a href="#" class=" btn btn-primary btn-rounded" style="background-color: orange;">
+                                Register Now
+                            </a>-->
+                            <a href="/register" class="btn btn-primary btn-rounded button-down1"><span class="event-button"><b>Register Now</b></span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="cover_nav">
+        <ul class="cover_dots">
+            <li class="active" data="0"><span><b>IIT(BHU)</b></span></li>
+        </ul>
+    </div>
+</section>
+<!--cover section slider end -->
+
+<!--event info -->
+<section class="pt100 pb100">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-6 col-md-3  ">
+                <div class="icon_box_two">
+                    <i class="ion-ios-calendar-outline"></i>
+                    <div class="content">
+                        <h5 class="box_title">
+                            DATE
+                        </h5>
+                        <p>
+                            1-2 February 2020 - Varanasi.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-3  ">
+                <div class="icon_box_two">
+                    <i class="ion-ios-location-outline"></i>
+                    <div class="content">
+                        <h5 class="box_title">
+                            location
+                        </h5>
+                        <p>
+                            Varanasi.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-3  ">
+                <div class="icon_box_two">
+                    <i class="ion-ios-person-outline"></i>
+                    <div class="content">
+                        <h5 class="box_title">
+                            funding
+                        </h5>
+                        <p>
+                            Funding opportunities from investors.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-3  ">
+                <div class="icon_box_two">
+                    <i class="ion-ios-pricetag-outline"></i>
+                    <div class="content">
+                        <h5 class="box_title">
+                            footfall
+                        </h5>
+                        <p>
+                            10000+ attendies.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--event info end -->
+
+
+<!--event countdown -->
+<section class="bg-img pt70 pb70" style="background-image: url('assets/img/bg/bg-img.png');">
+    <div class="overlay_dark"></div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10">
+                <h4 class="mb30 text-center color-light">Counter until the big event</h4>
+                <div class="countdown"></div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--event count down end-->
+
+
+<!--about the event -->
+<section class="pt100 pb100">
+    <div class="container">
+        <div class="section_title">
+            <h3 class="title">
+                About the event
+            </h3>
+        </div>
+        <!--<div class="row justify-content-center">
+            <div class="col-12 col-md-6">
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing eli. Integer iaculis in lacus a sollicitudin. Ut hendrerit hendrerit nisl a accumsan. Pellentesque convallis consectetur tortor id placerat. Curabitur a pulvinar nunc. Maecenas laoreet finibus lectus, at volutpat ligula euismod.
+                </p>
+            </div>
+            <div class="col-12 col-md-6">
+                <p>
+                    In rhoncus massa nec  sollicitudin. Ut hendrerit hendrerit nisl a accumsan. Pellentesque convallis consectetur tortor id placerat. Curabitur a pulvinar nunc. Maecenas laoreet finibus lectus, at volutpat ligula euismod quis. Maecenas ornare, ex in malesuada tempus.
+                </p>
+            </div>
+        </div>-->
+
+        <!--event features-->
+        <div class="row justify-content-center mt30">
+            <div class="col-12 col-md-6 col-lg-3">
+                <div class="icon_box_one">
+                    <i class="lnr lnr-mic"></i>
+                    <div class="content">
+                        <h4>60 + Speakers</h4>
+                        <p>
+                            The summit will proudly host entrepreneurs and investors as from Silicon Valley and different parts of India as speakers.
+                        </p>
+                       
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-3">
+                <div class="icon_box_one">
+                    <i class="lnr lnr-rocket"></i>
+                    <div class="content">
+                        <h4>20+ Events</h4>
+                        <p>
+                            Themed at industry 4.0, the summit is a conclave of panel discussions, workshops, networking, pitching and brainstorming events.
+                        </p>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-3">
+                <div class="icon_box_one">
+                    <i class="lnr lnr-bullhorn"></i>
+                    <div class="content">
+                        <h4>1.5 million worth prizes</h4>
+                        <p>
+                            To promote student entrepreneurs through several bootcamps and brainstorming events.
+                        </p>
+                       
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-3">
+                <div class="icon_box_one">
+                    <i class="lnr lnr-clock"></i>
+                    <div class="content">
+                        <h4>Early Bird</h4>
+                        <p>
+                            So, what are you waiting for? Hurry up! Grab a ticket for the biggest entrepreneurship summit happening in one of the oldest cities in the world. The early bird registrations will close on 10th January 2020.
+                        </p>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--event features end-->
+    </div>
+</section>
+<!--about the event end -->
+
+
+<!--Price section-->
+<section class="pb100">
+    <div class="container">
+        <div class="section_title mb50">
+            <h3 class="title">
+                Endorsements
+            </h3>
+        </div>
+
+        <div class="row justify-content-center">
+            <!--<div class="col-md-4 col-12">
+                <div class="price_box active">
+                    <div class="price_highlight">
+                        recommended
+                    </div>
+                   <div class="price_header">
+                       <h4>
+                           Early Bird
+                       </h4>
+                       <h6>
+                           For the fast ones
+                       </h6>
+                   </div>
+                    <div class="price_tag">
+                        65 <sup>$</sup>
+                    </div>
+                    <div class="price_features">
+                        <ul>
+                            <li>
+                                Early Entrance
+                            </li>
+                            <li>
+                                Front seat
+                            </li>
+                            <li>
+                                Complementary Drinks
+                            </li>
+                            <li>
+                                Promo Gift
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="price_footer">
+                        <a href="#" class="btn btn-primary btn-rounded">Purchase</a>
+                    </div>
+                </div>
+            </div>-->
+            <div class="col-md-4 col-12">
+                <div class="price_box">
+                    <div class="price_header">
+                        <h4>
+                            Coming Soon
+                        </h4>
+                        <h6>
+                            
+                        </h6>
+                    </div>
+                    <!--<div class="price_tag">
+                        85 <sup>$</sup>
+                    </div>
+                    <div class="price_features">
+                        <ul>
+                            <li>
+                                Early Entrance
+                            </li>
+                            <li>
+                                Front seat
+                            </li>
+                            <li>
+                                Complementary Drinks
+                            </li>
+                            <li>
+                                Promo Gift
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="price_footer">
+                        <a href="#" class="btn btn-primary btn-rounded">Purchase</a>
+                    </div>-->
+                </div>
+            </div>
+            <!--<div class="col-md-4 col-12">
+                <div class="price_box">
+                    <div class="price_header">
+                        <h4>
+                            Corporate
+                        </h4>
+                        <h6>
+                            For the business
+                        </h6>
+                    </div>
+                    <div class="price_tag">
+                        95 <sup>$</sup>
+                    </div>
+                    <div class="price_features">
+                        <ul>
+                            <li>
+                                Early Entrance
+                            </li>
+                            <li>
+                                Front seat
+                            </li>
+                            <li>
+                                Complementary Drinks
+                            </li>
+                            <li>
+                                Promo Gift
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="price_footer">
+                        <a href="#" class="btn btn-primary btn-rounded">Purchase</a>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+    </div>
+</section>
+<!--price section end -->
+
+
+<!--event -->
+<section class="pt100 pb100" id="Events">
+    <div class="container" id="events">
+        <div class="section_title">
+            <h3 class="title">
+                Events
+            </h3>
+        </div>
+        
+        <div class="project-menu" id="myBtnContainer">
+                <ul>
+                    <li>
+                                <span class="mybtn filter active" style="width: 180px;" onclick="filterSelection('all')">
+                                    <span class="mytext">All</span>
+                                    <span class="myflip-front">All</span>
+                                    <span class="myflip-back">All</span>
+                                </span>
+                    </li>
+                    <li>
+                                <span class="mybtn filter" style="width: 180px;" onclick="filterSelection('startup')">
+                                    <span class="mytext">Startup</span>
+                                    <span class="myflip-front">Startup</span>
+                                    <span class="myflip-back">Startup</span>
+                                </span>
+                    </li>
+                    <li>
+                                <span class="mybtn filter" style="width: 180px;" onclick="filterSelection('student')">
+                                    <span class="mytext">Student</span>
+                                    <span class="myflip-front">Student</span>
+                                    <span class="myflip-back">Student</span>
+                                </span>
+                    </li>
+                </ul>
+            </div>
+
+        <div class="container row justify-content-center mt30">
+            <div class="filterDiv student col-12 col-md-6 col-lg-3">
+                <div class="icon_box_one1" style="background: url('assets/img/event/Pitch Your Model.jpg'); background-repeat: no-repeat; background-size: cover;">
+                
+                    <div class="content ovrhid content-data">
+                        <h4>Pitch your Model</h4>
+                        <p class="event-class">
+                            <span class="span-icon-box">
+                                Pitch your Model is a Business Plan Competition for students who have moved on from their ideation stage towards creating a prototype.
+                            </span>
+                        </p>
+                            <div class="row justify-content-center" target="_blank">
+                                <a href="https://drive.google.com/file/d/1fqtaJt06ZIu6OMr0nb43LB3xJO_rNDBz/view?usp=sharing" class="btn btn-primary btn-rounded button-down" target="_blank"><span class="event-button">About</span></a>
+                            </div>
+                            <div class="row justify-content-center" target="_blank">
+                                <a href="/register" class="btn btn-primary btn-rounded button-up" target="_blank"> <span class="event-button"> Register </span></a>
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="filterDiv student col-12 col-md-6 col-lg-3">
+                <div class="icon_box_one1" style="background: url('assets/img/event/Idea Validation Arena.jpg'); background-repeat: no-repeat; background-size: cover;">
+                    
+                    <div class="content ovrhid content-data">
+                        <h4>Idea Validation Arena</h4>
+                        <p class="event-class">
+                            <span class="span-icon-box">
+                                Network with domain experts to validate your idea and gain feedback.
+                            </span>
+                        </p>
+                        
+                        <div class="row justify-content-center">
+                                <a href="https://drive.google.com/file/d/19Ynrx1OjQNb6uxL9wm1_TFO5K5f1HLWo/view?usp=sharing" class="btn btn-primary btn-rounded button-down" target="_blank"><span class="event-button">About</span></a>
+                            </div>
+                            <div class="row justify-content-center" target="_blank">
+                                <a href="/register" class="btn btn-primary btn-rounded button-up" target="_blank"> <span class="event-button"> Register </span></a>
+                            </div>
+                    
+                    </div>
+                </div>
+            </div>
+
+            <div class="filterDiv student col-12 col-md-6 col-lg-3">
+                <div class="icon_box_one1" style="background: url('assets/img/event/startup villa.jpg'); background-repeat: no-repeat; background-size: cover;">
+                    
+                    <div class="content ovrhid content-data">
+                        <h4>Startup Villa</h4>
+                        <p class="event-class">
+                            <span class="span-icon-box">
+                                A villa of 3 events-Social Entrepreneurship, Women Entrepreneurship and Flashcard Ideation.
+                            </span>
+                        </p>
+                       <div class="row justify-content-center">
+                                <a href="https://drive.google.com/file/d/1f3J-bJjLksTy7bzXVvGE1b4u4j2uA5m1/view?usp=sharing" class="btn btn-primary btn-rounded button-down" target="_blank"><span class="event-button">About</span></a>
+                            </div>
+                            <div class="row justify-content-center" target="_blank">
+                                <a href="/register" class="btn btn-primary btn-rounded button-up" target="_blank"> <span class="event-button"> Register </span></a>
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="filterDiv student col-12 col-md-6 col-lg-3">
+                <div class="icon_box_one1" style="background: url('assets/img/event/Scale it up.jpg'); background-repeat: no-repeat; background-size: cover;">
+                    <div class="content ovrhid content-data">
+                        <h4>Scale it up</h4>
+                        <p class="event-class">
+                            <span class="span-icon-box">
+                                Devise innovative methodologies to help a startup scale their model to a wider region.
+                            </span>
+                        </p>
+                       <div class="row justify-content-center">
+                                <a href="https://drive.google.com/file/d/1TxsW6PncPvm38Kvrboqm75O2Z3iC0aUz/view?usp=sharing" class="btn btn-primary btn-rounded button-down" target="_blank"><span class="event-button">About</span></a>
+                            </div>
+                            <div class="row justify-content-center" target="_blank">
+                                <a href="/register" class="btn btn-primary btn-rounded button-up" target="_blank"> <span class="event-button"> Register </span></a>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        
+
+
+            <div class="filterDiv student col-12 col-md-6 col-lg-3">
+                <div class="icon_box_one1" style="background: url('assets/img/event/crowded.jpg'); background-repeat: no-repeat; background-size: cover;">
+                
+                    <div class="content ovrhid content-data">
+                        <h4>Crowd-ed</h4>
+                        <p class="event-class">
+                            <span class="span-icon-box">
+                                Convince the crowd that you are truly passionate to solve the problem and make an emotional connect to get crowdfunded.
+                            </span>
+                        </p>
+                        
+                       <div class="row justify-content-center" target="_blank">
+                                <a href="https://drive.google.com/file/d/1c77xg5PnxE3AQB9TMAQuOFiPZnAJTKxX/view?usp=sharing" class="btn btn-primary btn-rounded button-down" target="_blank"><span class="event-button">About</span></a>
+                            </div>
+                            <div class="row justify-content-center" target="_blank">
+                                <a href="/register" class="btn btn-primary btn-rounded button-up" target="_blank"> <span class="event-button"> Register </span></a>
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="filterDiv student col-12 col-md-6 col-lg-3">
+                <div class="icon_box_one1" style="background: url('assets/img/event/Cisco.jpg'); background-repeat: no-repeat; background-size: cover;">
+                    
+                    <div class="content ovrhid content-data">
+                        <h4>Cisco Bootcamp</h4>
+                        <p class="event-class">
+                            <span class="span-icon-box">
+                                So, what are you waiting for? Hurry up! Grab a ticket for the biggest entrepreneurship...
+                            </span>
+                        </p>
+                        <div class="row justify-content-center" target="_blank">
+                                <a href="#" class="btn btn-primary btn-rounded button-down" target="_blank"><span class="event-button">About</span></a>
+                            </div>
+                            <div class="row justify-content-center" target="_blank">
+                                <a href="/register" class="btn btn-primary btn-rounded button-up" target="_blank"> <span class="event-button"> Register </span></a>
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="filterDiv student col-12 col-md-6 col-lg-3">
+                <div class="icon_box_one1" style="background: url('assets/img/event/designathon.jpg'); background-repeat: no-repeat; background-size: cover;">
+                    
+                    <div class="content ovrhid content-data">
+                        <h4>Design-a-thon</h4>
+                        <p class="event-class">
+                            <span class="span-icon-box">
+                                Design mockups for a new initiative of a startup, keeping the user experience in mind.
+                            </span>
+                        </p>
+                       <div class="row justify-content-center" target="_blank">
+                                <a href="https://drive.google.com/file/d/1BUsGbUh68wrtE6T4uOuAP5SwvYNvKk7R/view?usp=sharing" class="btn btn-primary btn-rounded button-down" target="_blank"><span class="event-button">About</span></a>
+                            </div>
+                            <div class="row justify-content-center" target="_blank">
+                                <a href="/register" class="btn btn-primary btn-rounded button-up" target="_blank"> <span class="event-button"> Register </span></a>
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="filterDiv student col-12 col-md-6 col-lg-3">
+                <div class="icon_box_one1" style="background: url('assets/img/event/iplauction.png'); background-repeat: no-repeat; background-size: cover;">
+                    <div class="content ovrhid content-data">
+                        <h4>Mock IPL Auction</h4>
+                        <p class="event-class">
+                            <span class="span-icon-box">
+                                If one loves cricket and is passionate about bidding strategy, then this event is a must-try shot.
+                            </span>
+                        </p>
+                       <div class="row justify-content-center" target="_blank">
+                                <a href="https://drive.google.com/file/d/1UEp2srf8O9wavwwgU_imxQtb_vKpPorI/view?usp=sharing" class="btn btn-primary btn-rounded button-down" target="_blank"><span class="event-button">About</span></a>
+                            </div>
+                            <div class="row justify-content-center" target="_blank">
+                                <a href="/register" class="btn btn-primary btn-rounded button-up" target="_blank"> <span class="event-button"> Register </span></a>
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+
+        <div class="filterDiv startup col-12 col-md-6 col-lg-3">
+                <div class="icon_box_one1" style="background: url('assets/img/event/Lone wolf.jpg'); background-repeat: no-repeat; background-size: cover;">
+                    <div class="content ovrhid content-data">
+                        <h4>LoneWolf Challenge</h4>
+                        <p class="event-class">
+                            <span class="span-icon-box">
+                                Pitch to a pool of IIT BHU investors and venture capitalists.
+                            </span>
+                        </p>
+                       <div class="row justify-content-center" target="_blank">
+                                <a href="#" class="btn btn-primary btn-rounded button-down" target="_blank"><span class="event-button">About</span></a>
+                            </div>
+                            <div class="row justify-content-center" target="_blank">
+                                <a href="/register" class="btn btn-primary btn-rounded button-up" target="_blank"> <span class="event-button"> Register </span></a>
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+        <div class="filterDiv startup col-12 col-md-6 col-lg-3">
+                <div class="icon_box_one1" style="background: url('assets/img/event/Speed dating.jpg'); background-repeat: no-repeat; background-size: cover;">
+                    <div class="content ovrhid content-data">
+                        <h4>Speed Dating</h4>
+                        <p class="event-class">
+                            <span class="span-icon-box">
+                                Pitch your idea to an investor on a 10 min boat ride on the Ganga river.
+                            </span>
+                        </p>
+                       <div class="row justify-content-center" target="_blank">
+                                <a href="https://drive.google.com/file/d/1Vf_iFYWC59ziXzDp2z48bazLXSNSYE8G/view?usp=sharing" class="btn btn-primary btn-rounded button-down" target="_blank"><span class="event-button">About</span></a>
+                            </div>
+                            <div class="row justify-content-center" target="_blank">
+                                <a href="/register" class="btn btn-primary btn-rounded button-up" target="_blank"> <span class="event-button"> Register </span></a>
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+        <div class="filterDiv startup col-12 col-md-6 col-lg-3">
+                <div class="icon_box_one1" style="background: url('assets/img/event/Incubate Me.jpeg'); background-repeat: no-repeat; background-size: cover;">
+                    <div class="content ovrhid content-data">
+                        <h4>Incubate Me</h4>
+                        <p class="event-class">
+                            <span class="span-icon-box">
+                                Get incubated at one of the leading incubators.
+                            </span>
+                        </p>
+                       <div class="row justify-content-center" target="_blank">
+                                <a href="https://drive.google.com/file/d/1FlAIgM_Q8Ieo-LEJo5vAaDqOtt0Y47DC/view?usp=sharing" class="btn btn-primary btn-rounded button-down" target="_blank"><span class="event-button">About</span></a>
+                            </div>
+                            <div class="row justify-content-center" target="_blank">
+                                <a href="/register" class="btn btn-primary btn-rounded button-up" target="_blank"> <span class="event-button"> Register </span></a>
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+        <div class="filterDiv startup col-12 col-md-6 col-lg-3">
+                <div class="icon_box_one1" style="background: url('assets/img/event/e carnival.jpg'); background-repeat: no-repeat; background-size: cover;">
+                    <div class="content ovrhid content-data">
+                        <h4>E-Carnival</h4>
+                        <p class="event-class">
+                            <span class="span-icon-box">
+                                Showcase your product/service to the humongous footfall of E-Summit.
+                            </span>
+                        </p>
+                      <div class="row justify-content-center" target="_blank">
+                                <a href="https://drive.google.com/file/d/1TW4efxarusMGyefODkgsv7Ivxqfr9avO/view?usp=sharing" class="btn btn-primary btn-rounded button-down" target="_blank"><span class="event-button">About</span></a>
+                            </div>
+                            <div class="row justify-content-center" target="_blank">
+                                <a href="/register" class="btn btn-primary btn-rounded button-up" target="_blank"> <span class="event-button"> Register </span></a>
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+
+        <div class="filterDiv student startup col-12 col-md-6 col-lg-3">
+                <div class="icon_box_one1" style="background: url('assets/img/event/Intern Connect.jpg'); background-repeat: no-repeat; background-size: cover;">
+                    <div class="content ovrhid content-data">
+                        <h4>Intern Connect</h4>
+                        <p class="event-class">
+                            <span class="span-icon-box">
+                                Hire interns from 400+ colleges.
+                            </span>
+                        </p>
+                       <div class="row justify-content-center" target="_blank">
+                                <a href="https://drive.google.com/file/d/1i6zaOFxI39ehoaAm7ggzIW5ukXY0zepz/view?usp=sharing" class="btn btn-primary btn-rounded button-down" target="_blank"><span class="event-button">About</span></a>
+                            </div>
+                            <div class="row justify-content-center" target="_blank">
+                                <a href="/register" class="btn btn-primary btn-rounded button-up" target="_blank"> <span class="event-button"> Register </span></a>
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+        <div class="filterDiv student startup col-12 col-md-6 col-lg-3">
+                <div class="icon_box_one1" style="background: url('assets/img/event/Panel Discussion.jpg'); background-repeat: no-repeat; background-size: cover;">
+                    <div class="content ovrhid content-data">
+                        <h4>Panel Discussions</h4>
+                        <p class="event-class">
+                            <span class="span-icon-box">
+                                Witness the discussion between the brightest minds.
+                            </span>
+                        </p>
+                       <div class="row justify-content-center" target="_blank">
+                                <a href="#" class="btn btn-primary btn-rounded button-down"  target="_blank"><span class="event-button">About</span></a>
+                            </div>
+                            <div class="row justify-content-center" target="_blank">
+                                <a href="/register" class="btn btn-primary btn-rounded button-up"  target="_blank"> <span class="event-button"> Register </span></a>
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+        <div class="filterDiv student startup col-12 col-md-6 col-lg-3">
+                <div class="icon_box_one1" style="background: url('assets/img/event/cruise dinner.jpg'); background-repeat: no-repeat; background-size: cover;">
+                    <div class="content ovrhid content-data">
+                        <h4>Alaknanda Cruise</h4>
+                        <p class="event-class">
+                            <span class="span-icon-box">
+                                Network with fellows on the cruise and experience Ganga aarti.
+                            </span>
+                        </p>
+                       <div class="row justify-content-center">
+                                <a href="#" class="btn btn-primary btn-rounded button-down" target="_blank"><span class="event-button">About</span></a>
+                            </div>
+                            <div class="row justify-content-center">
+                                <a href="/register" class="btn btn-primary btn-rounded button-up" target="_blank"> <span class="event-button"> Register </span></a>
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <!--event features end-->
+    </div>
+</section>
+<!--event end -->
+
+<!--speaker section-->
+<section class="pb100" id="Speakers">
+    <div class="container">
+        <div class="section_title mb50">
+            <h3 class="title">
+               Our Past Speakers
+            </h3>
+        </div>
+    </div>
+    <div class="row justify-content-center no-gutters">
+        <div class="col-md-3 col-sm-6">
+            <div class="speaker_box">
+                <div class="speaker_img">
+                    <a href="https://www.linkedin.com/in/bvjagadeesh/">
+                    <img src="assets/img/speakers/B V Jagadeesh.png" alt="speaker name">
+                    <div class="info_box">
+                        <h5 class="name">BV Jagadeesh</h5>
+                        <p class="position">MD, KAAJ Ventures</p>
+                    </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <div class="speaker_box">
+                <div class="speaker_img">
+                    <a href="https://www.linkedin.com/in/vish-narayanan-155814/">
+                    <img src="assets/img/speakers/Vish Narayanan.png" alt="speaker name">
+                    <div class="info_box">
+                        <h5 class="name">Vish Narayanan</h5>
+                        <p class="position">GVP, General Motors</p>
+                    </div></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <div class="speaker_box">
+                <div class="speaker_img">
+                    <a href="https://www.linkedin.com/in/vmohankumar/">
+                    <img src="assets/img/speakers/MohanKumar.jpg" alt="speaker name">
+                    <div class="info_box">
+                        <h5 class="name">Mohan Kumar</h5>
+                        <p class="position">Partner, Norwest Ventures</p>
+                    </div></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <div class="speaker_box">
+                <div class="speaker_img">
+                    <a href="https://www.linkedin.com/in/sarvajnadwivedi/">
+                    <img src="assets/img/speakers/Sarvajna Dwiveed.jpg" alt="speaker name">
+                    <div class="info_box">
+                        <h5 class="name">Sarvajna Dwivedi</h5>
+                        <p class="position">Board Member, Angiosafe</p>
+                    </div></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <div class="speaker_box">
+                <div class="speaker_img">
+                    <a href="https://www.linkedin.com/in/jyoti-bachani-1a439a7/">
+                    <img src="assets/img/speakers/Jyoti Bachani.jpg" alt="speaker name">
+                    <div class="info_box">
+                        <h5 class="name">Jyoti Bachani</h5>
+                        <p class="position">Associate Professor, Saint Mary's College of California</p>
+                    </div></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <div class="speaker_box">
+                <div class="speaker_img">
+                    <a href="https://www.linkedin.com/in/ajay-sharma-9b242950/">
+                    <img src="assets/img/speakers/ajay sharma.png" alt="speaker name">
+                    
+                        <div class="info_box">
+                            <h5 class="name">Ajay Sharma</h5>
+                            <p class="position">Co-Founder, Flowering Tree Investment Management</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <div class="speaker_box">
+                <div class="speaker_img">
+                    <a href="https://www.linkedin.com/in/robert-t-smits-9744772b/">
+                    <img src="assets/img/speakers/Robert.jpg" alt="speaker name">
+                    <div class="info_box">
+                        <h5 class="name">Robert T Smits</h5>
+                        <p class="position">Supervisory Board, Trymax Semiconductors</p>
+                    </div></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <div class="speaker_box">
+                <div class="speaker_img">
+                    <a href="https://www.linkedin.com/in/viswanathan-iyer-90a0781/">
+                    <img src="assets/img/speakers/Vishwanathan Iyer.png" alt="speaker name">
+                    <div class="info_box">
+                        <h5 class="name">Vishwanathan Iyer</h5>
+                        <p class="position">VP of Architectures(Asia Pacific & Japan), CISCO</p>
+                    </div></a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3 col-sm-6">
+            <div class="speaker_box">
+                <div class="speaker_img">
+                    <a href="https://www.linkedin.com/in/sunil-khanna-8661734/">
+                    <img src="assets/img/speakers/Sunil Khanna.png" alt="speaker name">
+                    <div class="info_box">
+                        <h5 class="name">Sunil Khanna</h5>
+                        <p class="position">President, Vertiv India</p>
+                    </div></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <div class="speaker_box">
+                <div class="speaker_img">
+                    <a href="https://www.linkedin.com/in/madhup-garg-43297511/">
+                    <img src="assets/img/speakers/Madhup Garg.png" alt="speaker name">
+                    <div class="info_box">
+                        <h5 class="name">Madhup Garg</h5>
+                        <p class="position">President, eServicesPartner</p>
+                    </div></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <div class="speaker_box">
+                <div class="speaker_img">
+                    <a href="https://www.linkedin.com/in/rahulsh1709/">
+                    <img src="assets/img/speakers/Rahul Sharma.jpg" alt="speaker name">
+                    <div class="info_box">
+                        <h5 class="name">Rahul Sharma</h5>
+                        <p class="position">President, WWPS India and South Asia, AWS</p>
+                    </div></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <div class="speaker_box">
+                <div class="speaker_img">
+                    <a href="https://www.linkedin.com/in/sethisanjay/">
+                    <img src="assets/img/speakers/Sanjay Sethi.jpg" alt="speaker name">
+                    <div class="info_box">
+                        <h5 class="name">Sanjay Sethi</h5>
+                        <p class="position">Cofounder, ShopClues</p>
+                    </div></a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</section>
+<!--speaker section end -->
+
+
+<!--event calender-->
+<section class="pb100" id="Workshops">
+    <div class="container">
+        <div class="table-responsive">
+            <table class="event_calender table">
+                <thead class="event_title">
+                <tr>
+                    <th>
+                        <i class="ion-ios-calendar-outline"></i>
+                        <span>Workshops</span>
+                    </th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>
+                        <img src="assets/img/workshops/KPMG_logo.svg.png" alt="event">
+                    </td>
+                    <td>
+                        <h6><span>31st January to 2nd February</span></h6>
+                    </td>
+                    <td>
+                        <div class="event_place">
+                            <h5>Lean Six Sigma Green Belt Training Programme by KPMG India</h5>
+                            <h6>08 AM - 05 PM</h6>
+                        </div>
+                    </td>
+                    <td>
+                        <a href="#" class="btn btn-primary btn-rounded w-button" >Read More</a>
+                    </td>
+                </tr>
+                
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+<!--event calender end -->
+
+<!--brands section -->
+<section class="bg-gray pt100 pb100">
+    <div class="container">
+        <div class="section_title mb50">
+            <h3 class="title">
+                past sponsors
+            </h3>
+        </div>
+        <div class="brand_carousel owl-carousel">
+            <div class="brand_item text-center">
+                <img src="assets/img/sponsors/Aeris.png" alt="brand">
+            </div>
+            <div class="brand_item text-center">
+                <img src="assets/img/sponsors/Cisco.png" alt="brand">
+            </div>
+
+            <div class="brand_item text-center">
+                <img src="assets/img/sponsors/Department of Science and Technology.png" alt="brand">
+            </div>
+            <div class="brand_item text-center">
+                <img src="assets/img/sponsors/India Accelerator.png" alt="brand">
+            </div>
+            <div class="brand_item text-center">
+                <img src="assets/img/sponsors/Startin UP.png" alt="brand">
+            </div>
+            <div class="brand_item text-center">
+                <img src="assets/img/sponsors/Startup Buddy.png" alt="brand">
+            </div>
+            <div class="brand_item text-center">
+                <img src="assets/img/sponsors/Thinqbate.png" alt="brand">
+            </div>
+            <div class="brand_item text-center">
+                <img src="assets/img/sponsors/UP Government.png" alt="brand">
+            </div>
+            <div class="brand_item text-center">
+                <img src="assets/img/sponsors/Z Nation Lab.png" alt="brand">
+            </div>
+        </div>
+    </div>
+</section>
+<!--brands section end-->
+
+<!--get tickets section -->
+<section class="bg-img pt100 pb100" id="Contact" style="background-image: url('assets/img/bg/tickets.png');">
+    <div class="container">
+        <div class="section_title mb30">
+            <h3 class="title color-light">
+                Get Involved
+            </h3>
+        </div>
+        <div class="row justify-content-center align-items-center">
+            <div class="col-md-9 text-md-left text-center color-light">
+                For sponsorship and speaking opportunities email us at <a href="mailto:ecell@iitbhu.ac.in" style="color: red;">ecell@iitbhu.ac.in</a>.
+            </div>
+            <!--<div class="col-md-3 text-md-right text-center">
+                <a href="#" class="btn btn-primary btn-rounded mt30">buy now</a>
+            </div>-->
+        </div>
+    </div>
+</section>
+<!--get tickets section end-->
+
+<!--footer start -->
+<footer>
+    <div class="container">
+        <div class="row justify-content-center">
+
+            <div class="col-md-4 col-12">
+                <div class="footer_box">
+                    <div class="footer_header">
+                        <div class="footer_logo">
+                            <img src="assets/img/logo.png" alt="E Summit">
+                        </div>
+                    </div>
+                    <div class="footer_box_body">
+                        <p>
+                            E-Summit is an excellent opportunity for young and aspiring entrepreneurs to turn their startup dreams into reality. It provides a perfect platform for the unsung heroes of our economy to interact with prospective investors by pitching their ideas.
+                        </p>
+                        <ul class="footer_social">
+                            <li>
+                                <a href="https://www.linkedin.com/company/14424538"><i class="ion-social-linkedin"></i></a>
+                            </li>
+                            <li>
+                                <a href="https://www.facebook.com/ecelliitvaranasi/"><i class="ion-social-facebook"></i></a>
+                            </li>
+                            <li>
+                                <a href="https://twitter.com/ecelliitbhu"><i class="ion-social-twitter"></i></a>
+                            </li>
+                            <li>
+                                <a href="https://www.instagram.com/ecelliitbhu/?hl=en"><i class="ion-social-instagram"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-16 col-md-4">
+                <div class="footer_box">
+                    <div class="footer_header">
+                        <h4 class="footer_title">
+                            instagram
+                        </h4>
+                    </div>
+                    <div class="footer_box_body">
+                        <ul class="instagram_list">
+                            <li>
+                                <a>
+                                    <img src="assets/img/instagram/inst1.jpg" alt="instagram">
+                                </a>
+                            </li>
+                            <li>
+                                <a>
+                                    <img src="assets/img/instagram/inst2.jpg" alt="instagram">
+                                </a>
+                            </li>
+                            <li>
+                                <a >
+                                    <img src="assets/img/instagram/inst3.jpg" alt="instagram">
+                                </a>
+                            </li>
+                            <li>
+                                <a>
+                                    <img src="assets/img/instagram/inst4.jpg" alt="instagram">
+                                </a>
+                            </li>
+                            <li>
+                                <a>
+                                    <img src="assets/img/instagram/inst5.jpg" alt="instagram">
+                                </a>
+                            </li>
+                            <li>
+                                <a>
+                                    <img src="assets/img/instagram/inst6.jpg" alt="instagram">
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-4">
+                <div class="footer_box">
+                    <div class="footer_header">
+                        <h4 class="footer_title">
+                            Contact us
+                        </h4>
+                    </div>
+                    <div class="footer_box_body">
+
+                        <div class="newsletter_form">
+                            <b style="color: white;">Address</b> - E-Cell, NCL-IIT (BHU) Incubation Centre, IIT(BHU) Varanasi - 221005<br>
+                            <b style="color: white;">Email us</b> - ecell@iitbhu.ac.in<br>
+                            <b style="color: white;">Convener</b> - Mayank Lakhani (+91 7800291779)<br>
+                            <b style="color: white;">Co-Convener</b> - Vicky Vijay Junghare (+91 8669023107)<br>
+                            <b style="color: white;">Co-Convener</b> - Balram Gupta (+91 8319553974)<br>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<div class="copyright_footer">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-12">
+                <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. 
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved--> 
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+            </div>
+            <!--<div class="col-12 col-md-6 ">
+                <ul class="footer_menu">
+                    <li>
+                        <a href="#">Home</a>
+                    </li>
+                    <li>
+                        <a href="#">Speakers</a>
+                    </li>
+                    <li>
+                        <a href="#">Events</a>
+                    </li>
+                    <li>
+                        <a href="#">News</a>
+                    </li>
+                    <li>
+                        <a href="#">Contact</a>
+                    </li>
+                </ul>
+            </div>-->
+        </div>
+    </div>
+</div>
+<!--footer end -->
+
+<!-- jquery -->
+<script src="assets/js/jquery.min.js"></script>
+<!-- bootstrap -->
+<script src="assets/js/popper.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/waypoints.min.js"></script>
+<!--slick carousel -->
+<script src="assets/js/owl.carousel.min.js"></script>
+<!--parallax -->
+<script src="assets/js/parallax.min.js"></script>
+<!--Counter up -->
+<script src="assets/js/jquery.counterup.min.js"></script>
+<!--Counter down -->
+<script src="assets/js/jquery.countdown.min.js"></script>
+<!-- WOW JS -->
+<script src="assets/js/wow.min.js"></script>
+<!-- Custom js -->
+<script src="assets/js/main.js"></script>
+<script type="text/javascript">
+
+filterSelection("all")
+function filterSelection(c) {
+  var x, i;
+  x = document.getElementsByClassName("filterDiv");
+  if (c == "all") c = "";
+  // Add the "show" class (display:block) to the filtered elements, and remove the "show" class from the elements that are not selected
+  for (i = 0; i < x.length; i++) {
+    w3RemoveClass(x[i], "show");
+    if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
+  }
+}
+
+// Show filtered elements
+function w3AddClass(element, name) {
+  var i, arr1, arr2;
+  arr1 = element.className.split(" ");
+  arr2 = name.split(" ");
+  for (i = 0; i < arr2.length; i++) {
+    if (arr1.indexOf(arr2[i]) == -1) {
+      element.className += " " + arr2[i];
+    }
+  }
+}
+
+// Hide elements that are not selected
+function w3RemoveClass(element, name) {
+  var i, arr1, arr2;
+  arr1 = element.className.split(" ");
+  arr2 = name.split(" ");
+  for (i = 0; i < arr2.length; i++) {
+    while (arr1.indexOf(arr2[i]) > -1) {
+      arr1.splice(arr1.indexOf(arr2[i]), 1);
+    }
+  }
+  element.className = arr1.join(" ");
+}
+
+// Add active class to the current control button (highlight it)
+var btnContainer = document.getElementById("myBtnContainer");
+var btns = btnContainer.getElementsByClassName("mybtn");
+for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener("click", function() {
+    var current = document.getElementsByClassName("filter active");
+    current[0].className = current[0].className.replace("active", "");
+    this.className += " active";
+  });
+}
+
+</script>
+</body>
+</html>

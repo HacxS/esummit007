@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ========== Meta Tags ========== -->
+    <meta charset="UTF-8">
+    <meta name="description" content="ESummit">
+    <meta name="keywords" content="ESummit , Event , Html">
+    <meta name="author" content="ESummit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- ========== Title ========== -->
+    <title> ESummit'20</title>
+    <!-- ========== Favicon Ico ========== -->
+    <!--<link rel="icon" href="fav.ico">-->
+    <!-- ========== STYLESHEETS ========== -->
+    <!-- Bootstrap CSS -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Fonts Icon CSS -->
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet">
+    <link href="assets/css/et-line.css" rel="stylesheet">
+    <link href="assets/css/ionicons.min.css" rel="stylesheet">
+    <!-- Carousel CSS -->
+    <link href="assets/css/owl.carousel.min.css" rel="stylesheet">
+    <link href="assets/css/owl.theme.default.min.css" rel="stylesheet">
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="assets/css/animate.min.css">
+    <!-- Custom styles for this template -->
+    <link href="assets/css/main.css" rel="stylesheet">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154714929-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-154714929-1');
+    </script>
+</head>
+<body>
+<div class="loader">
+    <div class="loader-outter"></div>
+    <div class="loader-inner"></div>
+</div>
+
+<!--header start here -->
+<header class="header navbar fixed-top navbar-expand-md">
+    <div class="container">
+        <a class="navbar-brand logo" href="/">
+            <img src="assets/img/logo.png" alt="ESummit"/>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#headernav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="lnr lnr-text-align-right"></span>
+        </button>
+        <div class="collapse navbar-collapse flex-sm-row-reverse" id="headernav">
+            <ul class=" nav navbar-nav menu">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="/#Speakers">Speakers</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="/#Events">Events</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="/#Workshops">Workshops</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="/#Contact">Contact</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link " href="/register">Register</a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</header>
+<!--header end here-->
+<% include ./partials/messages %>
+<!--cover section slider -->
+<section id="home" class="home-cover">
+    <div class="cover_slider owl-carousel owl-theme">
+        <div class="cover_item" style="height: 1159px;background: url('assets/img/bg/122.jpg'); min-height: 1000px;">
+             <div class="slider_content">
+                <div class="slider-content-inner">
+                    <div class="container" style="position: relative;   top: -133px;">
+                        <div style="max-width: 650px;" class="slider-content-center">
+                            <!--<img src="assets/img/bg/123.png">
+                            <h2 class="cover-title">
+                                
+                            </h2>
+                            <strong class="cover-xl-text">Coming Soon</strong>-->
+                            <p class="cover-date" style="text-decoration: underline;                            margin-bottom: 53px;">
+                                 <a style="font-size: 19px;" href="/register">New Member?</a>
+                            </p>
+                            <div class="form">
+                                <form action="/login" method="post">
+                                    
+                                    
+
+                                    <div class="col-sm-12">
+                                        <label>
+                                          Email:
+                                        </label>
+                                        <input type="email" class="form-control" name="email" placeholder="Enter Your Email" required>
+                                    </div>
+
+                                    <div class="col-sm-12">
+                                        <label>
+                                          Password
+                                        </label>
+                                        <input type="password" class="form-control" name="password" placeholder="Enter a password of more than 6 characters" required>
+                                    </div>
+
+                                    
+                                    <button type="submit" class="btn btn-primary btn-rounded button-down1"><span class="event-button"><b>Log In</b></span></a>
+
+                                  </form>
+
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+<!--cover section slider end -->
+
+
+<!--footer start -->
+<footer>
+    <div class="container">
+        <div class="row justify-content-center">
+
+            <div class="col-md-4 col-12">
+                <div class="footer_box">
+                    <div class="footer_header">
+                        <div class="footer_logo">
+                            <img src="assets/img/logo.png" alt="E Summit">
+                        </div>
+                    </div>
+                    <div class="footer_box_body">
+                        <p>
+                            E-Summit is an excellent opportunity for young and aspiring entrepreneurs to turn their startup dreams into reality. It provides a perfect platform for the unsung heroes of our economy to interact with prospective investors by pitching their ideas.
+                        </p>
+                        <ul class="footer_social">
+                            <li>
+                                <a href="https://www.linkedin.com/company/14424538"><i class="ion-social-linkedin"></i></a>
+                            </li>
+                            <li>
+                                <a href="https://www.facebook.com/ecelliitvaranasi/"><i class="ion-social-facebook"></i></a>
+                            </li>
+                            <li>
+                                <a href="https://twitter.com/ecelliitbhu"><i class="ion-social-twitter"></i></a>
+                            </li>
+                            <li>
+                                <a href="https://www.instagram.com/ecelliitbhu/?hl=en"><i class="ion-social-instagram"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-16 col-md-4">
+                <div class="footer_box">
+                    <div class="footer_header">
+                        <h4 class="footer_title">
+                            instagram
+                        </h4>
+                    </div>
+                    <div class="footer_box_body">
+                        <ul class="instagram_list">
+                            <li>
+                                <a>
+                                    <img src="assets/img/instagram/inst1.jpg" alt="instagram">
+                                </a>
+                            </li>
+                            <li>
+                                <a>
+                                    <img src="assets/img/instagram/inst2.jpg" alt="instagram">
+                                </a>
+                            </li>
+                            <li>
+                                <a >
+                                    <img src="assets/img/instagram/inst3.jpg" alt="instagram">
+                                </a>
+                            </li>
+                            <li>
+                                <a>
+                                    <img src="assets/img/instagram/inst4.jpg" alt="instagram">
+                                </a>
+                            </li>
+                            <li>
+                                <a>
+                                    <img src="assets/img/instagram/inst5.jpg" alt="instagram">
+                                </a>
+                            </li>
+                            <li>
+                                <a>
+                                    <img src="assets/img/instagram/inst6.jpg" alt="instagram">
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-4">
+                <div class="footer_box">
+                    <div class="footer_header">
+                        <h4 class="footer_title">
+                            Contact us
+                        </h4>
+                    </div>
+                    <div class="footer_box_body">
+
+                        <div class="newsletter_form">
+                            <b style="color: white;">Address</b> - E-Cell, NCL-IIT (BHU) Incubation Centre, IIT(BHU) Varanasi - 221005<br>
+                            <b style="color: white;">Email us</b> - ecell@iitbhu.ac.in<br>
+                            <b style="color: white;">Convener</b> - Mayank Lakhani (+91 7800291779)<br>
+                            <b style="color: white;">Co-Convener</b> - Vicky Vijay Junghare (+91 8669023107)<br>
+                            <b style="color: white;">Co-Convener</b> - Balram Gupta (+91 8319553974)<br>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!--footer end -->
+
+<!-- jquery -->
+<script src="assets/js/jquery.min.js"></script>
+<!-- bootstrap -->
+<script src="assets/js/popper.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/waypoints.min.js"></script>
+<!--slick carousel -->
+<script src="assets/js/owl.carousel.min.js"></script>
+<!--parallax -->
+<script src="assets/js/parallax.min.js"></script>
+<!--Counter up -->
+<script src="assets/js/jquery.counterup.min.js"></script>
+<!--Counter down -->
+<script src="assets/js/jquery.countdown.min.js"></script>
+<!-- WOW JS -->
+<script src="assets/js/wow.min.js"></script>
+<!-- Custom js -->
+<script src="assets/js/main.js"></script>
+<script type="text/javascript">
+filterSelection("all")
+function filterSelection(c) {
+  var x, i;
+  x = document.getElementsByClassName("filterDiv");
+  if (c == "all") c = "";
+  // Add the "show" class (display:block) to the filtered elements, and remove the "show" class from the elements that are not selected
+  for (i = 0; i < x.length; i++) {
+    w3RemoveClass(x[i], "show");
+    if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
+  }
+}
+// Show filtered elements
+function w3AddClass(element, name) {
+  var i, arr1, arr2;
+  arr1 = element.className.split(" ");
+  arr2 = name.split(" ");
+  for (i = 0; i < arr2.length; i++) {
+    if (arr1.indexOf(arr2[i]) == -1) {
+      element.className += " " + arr2[i];
+    }
+  }
+}
+// Hide elements that are not selected
+function w3RemoveClass(element, name) {
+  var i, arr1, arr2;
+  arr1 = element.className.split(" ");
+  arr2 = name.split(" ");
+  for (i = 0; i < arr2.length; i++) {
+    while (arr1.indexOf(arr2[i]) > -1) {
+      arr1.splice(arr1.indexOf(arr2[i]), 1);
+    }
+  }
+  element.className = arr1.join(" ");
+}
+// Add active class to the current control button (highlight it)
+var btnContainer = document.getElementById("myBtnContainer");
+var btns = btnContainer.getElementsByClassName("mybtn");
+for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener("click", function() {
+    var current = document.getElementsByClassName("filter active");
+    current[0].className = current[0].className.replace("active", "");
+    this.className += " active";
+  });
+}
+</script>
+</body>
+</html>

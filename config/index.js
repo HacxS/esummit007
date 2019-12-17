@@ -16,9 +16,9 @@ middlewareObj.forwardAuthenticated = function(req, res, next) {
   res.redirect('/dashboard');      
 }
 
-middlewareObj.checkEmailVarification = function(req, res, next){
+middlewareObj.checkEmailVerification = function(req, res, next){
   // Is user Logged in
- if(req.user && req.user.verified == false){
+ if(req.user && req.user.verify == false){
      next(); 
  }else{
 
@@ -30,6 +30,7 @@ middlewareObj.checkEmailVarification = function(req, res, next){
         'success_msg',
         'Email is already verified'
       );
+      
       res.redirect("/dashboard"); 
     }
       // Redirect to the previous page

@@ -1,8 +1,13 @@
 var mongoose = require("mongoose");
 var passportLocalMongoose = require("passport-local-mongoose");
 
+
 var userSchema = new mongoose.Schema({
-  name: {
+  first_name: {
+    type: String,
+    required: true
+  },
+  last_name: {
     type: String,
     required: true
   },
@@ -22,43 +27,25 @@ var userSchema = new mongoose.Schema({
      type: String,
      required: true 
   },
-  branch : {
-    type: String,
-    required : true
-  },
-  course : {
+  city : {
     type : String,
     required : true
-  },
-  year : {
-    type : String,
-    required : String
   },
   date: {
     type: Date,
     default: Date.now
   },
-  verified:{
-    type: Boolean,
-    default: false
-  },
-  referal_code: {
-    type : String,
-    default : null
-  },
-  refered_to: [{
-    id: {
-      type : String
-    }
-  }],
   referal_from : {
     type: String,
     default: null
   },
-  link : {
-    type : String,
-    default : null
-  }
+  verify : {
+    type : Boolean,
+    default : false
+  },
+  link : [{
+    type : Number
+  }]
   });
 
   userSchema.plugin(passportLocalMongoose);
