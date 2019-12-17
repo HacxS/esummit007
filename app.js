@@ -52,7 +52,7 @@ var index = require("./routes/index")
 // Routes
 app.use('/', index);
 
-const PORT = process.env.PORT || 7000;
+const PORT = process.env.PORT || 443;
 
 app.listen(PORT, function(){
     console.log("Server started");
