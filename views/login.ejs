@@ -34,6 +34,19 @@
       gtag('js', new Date());
       gtag('config', 'UA-154714929-1');
     </script>
+    <style>
+        .cover_slider .cover_item{
+            height: 1159px;
+        }
+        .form-control{
+            border-radius: 27px;
+        }
+        @media (max-width: 500px) {
+            .cover_slider .cover_item{
+            height: 1400px;
+        }
+        }
+    </style>
 </head>
 <body>
 <div class="loader">
@@ -81,7 +94,7 @@
 <!--cover section slider -->
 <section id="home" class="home-cover">
     <div class="cover_slider owl-carousel owl-theme">
-        <div class="cover_item" style="height: 1159px;background: url('assets/img/bg/122.jpg'); min-height: 1000px;">
+        <div class="cover_item" style="background: url('assets/img/bg/122.jpg'); min-height: 1000px;">
              <div class="slider_content">
                 <div class="slider-content-inner">
                     <div class="container" style="position: relative;   top: -133px;">
@@ -89,10 +102,10 @@
                             <!--<img src="assets/img/bg/123.png">
                             <h2 class="cover-title">
                                 
-                            </h2>
-                            <strong class="cover-xl-text">Coming Soon</strong>-->
-                            <p class="cover-date" style="text-decoration: underline;                            margin-bottom: 53px;">
-                                 <a style="font-size: 19px;" href="/register">New Member?</a>
+                            </h2>-->
+                            <strong class="cover-xl-text" style="font-size: 45px;">Login</strong>
+                            <p class="cover-date" style="text-decoration: underline;    margin-top: 24px;                        margin-bottom: 53px;">
+                                 <a style="font-size: 17px;text-transform: none;" href="/register">New Member? Register</a>
                             </p>
                             <div class="form">
                                 <form action="/login" method="post">

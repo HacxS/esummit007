@@ -34,6 +34,19 @@
       gtag('js', new Date());
       gtag('config', 'UA-154714929-1');
     </script>
+        <style>
+                .cover_slider .cover_item{
+                    height: 1159px;
+                }
+                @media (max-width: 500px) {
+                    .cover_slider .cover_item{
+                    height: 1400px;
+                }
+                }
+                .form-control{
+            border-radius: 27px;
+        }
+            </style>
 </head>
 <body>
 <div class="loader">
@@ -69,7 +82,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link " href="/register">Register</a>
+                    <a class="nav-link " href="/login">Login</a>
                 </li>
 
             </ul>
@@ -81,7 +94,7 @@
 <!--cover section slider -->
 <section id="home" class="home-cover">
     <div class="cover_slider owl-carousel owl-theme">
-        <div class="cover_item" style="height: 1159px;background: url('assets/img/bg/122.jpg'); min-height: 1000px;">
+        <div class="cover_item" style="background: url('assets/img/bg/122.jpg'); min-height: 1000px;">
              <div class="slider_content">
                 <div class="slider-content-inner">
                     <div class="container">
@@ -89,10 +102,10 @@
                             <!--<img src="assets/img/bg/123.png">
                             <h2 class="cover-title">
                                 
-                            </h2>
-                            <strong class="cover-xl-text">Coming Soon</strong>-->
-                            <p class="cover-date" style="text-decoration: underline;                            margin-bottom: 53px;">
-                                 <a style="font-size: 19px;" href="/login">Already a Member?</a>
+                            </h2>-->
+                            <strong class="cover-xl-text" style="font-size: 45px;">Register</strong>
+                            <p class="cover-date" style="text-decoration: underline;    margin-top: 24px;                        margin-bottom: 53px;">
+                                 <a style="font-size: 17px;text-transform: none;" href="/login">Already a Member? Login</a>
                             </p>
                             <div class="form">
                                 <form action="/register" method="post">
@@ -112,53 +125,67 @@
                                     </div>
                                     
 
-                                    <div class="col-sm-12">
-                                        <label>
-                                          Email:
-                                        </label>
-                                        <input type="email" class="form-control" name="email" placeholder="Enter Your Email" required>
+                                    <div class="row">
+
+                                            <div class="col-sm-12">
+                                                    <label>
+                                                      Email:
+                                                    </label>
+                                                    <input type="email" class="form-control" name="email" placeholder="Enter Your Email" required>
+                                                </div>
                                     </div>
 
-                                    <div class="col-sm-12">
-                                        <label>
-                                          Password
-                                        </label>
-                                        <input type="password" class="form-control" name="password" placeholder="Enter a password of more than 6 characters" required>
-                                    </div>
 
-                                    <div class="col-sm-12">
-                                        <label>
-                                          Confirm Password
-                                        </label>
-                                        <input type="password" class="form-control" name="password2" placeholder="Confirm your password" required>
-                                    </div>
+                                    
+                                    <div class="row">
 
-                                    <div class="col-sm-12">
-                                        <label>
-                                          College/Organisation:
-                                        </label>
-                                        <input type="text" class="form-control" name="college" placeholder="Enter Your College" required>
-                                    </div>
-
-                                    <div class="col-sm-12">
+                                        <div class="col-sm-6">
                                             <label>
-                                            City:
+                                            Password
                                             </label>
-                                            <input type="text" class="form-control" name="city" placeholder="Enter Your City" required>
+                                            <input type="password" class="form-control" name="password" placeholder="Enter a password of more than 6 characters" required>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <label>
+                                            Confirm Password
+                                            </label>
+                                            <input type="password" class="form-control" name="password2" placeholder="Confirm your password" required>
+                                        </div>
+
                                     </div>
-                                    <div class="col-sm-12">
-                                          <label>
-                                            Phone Number:
-                                          </label>
-                                          <input type="text" class="form-control" name="phone" placeholder="Enter Your Mob. Number" required>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <label>
+                                            College/Organisation:
+                                            </label>
+                                            <input type="text" class="form-control" name="college" placeholder="Enter Your College" required>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                                <label>
+                                                City:
+                                                </label>
+                                                <input type="text" class="form-control" name="city" placeholder="Enter Your City" required>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                            <div class="col-sm-6">
+                                                    <label>
+                                                      Phone Number:
+                                                    </label>
+                                                    <input type="text" class="form-control" name="phone" placeholder="Enter Your Mob. Number" required>
+                                              </div>
+                                              
+                                              <div class="col-sm-6">
+                                                  <label>
+                                                    Referral Code: (Optional)
+                                                  </label>
+                                                  <input type="text" class="form-control" name="referal_from" placeholder="Enter Your Referral" >
+                                              </div>
+
                                     </div>
                                     
-                                    <div class="col-sm-12">
-                                        <label>
-                                          Referral Code: (Optional)
-                                        </label>
-                                        <input type="text" class="form-control" name="referal_from" placeholder="Enter Your Referral" >
-                                    </div>
 
                                     <button type="submit" class="btn btn-primary btn-rounded button-down1"><span class="event-button"><b>Register Now</b></span></a>
 
