@@ -1,8 +1,19 @@
 var mongoose = require("mongoose");
 var passportLocalMongoose = require("passport-local-mongoose");
+var ids = require('short-id');
+
+ids.configure({
+  length: 5,          // The length of the id strings to generate
+  algorithm: 'sha1',  // The hashing algoritm to use in generating keys
+  salt: Math.random   // A salt value or function
+});
 
 
 var userSchema = new mongoose.Schema({
+  _id: {
+    type: String,
+    default: "ES-" + ids.generate()
+  },
   first_name: {
     type: String,
     required: true
