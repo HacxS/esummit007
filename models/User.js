@@ -10,7 +10,7 @@ ids.configure({
 
 
 var userSchema = new mongoose.Schema({
-  _id: {
+  id: {
     type: String,
     default: "ES-" + ids.generate()
   },
