@@ -1,94 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <!-- ========== Meta Tags ========== -->
-    <meta charset="UTF-8">
-    <meta name="description" content="ESummit">
-    <meta name="keywords" content="ESummit , Event , Html">
-    <meta name="author" content="ESummit">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <!-- ========== Title ========== -->
-    <title> ESummit'20</title>
-    <!-- ========== Favicon Ico ========== -->
-    <!--<link rel="icon" href="fav.ico">-->
-    <!-- ========== STYLESHEETS ========== -->
-    <!-- Bootstrap CSS -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Fonts Icon CSS -->
-    <link href="assets/css/font-awesome.min.css" rel="stylesheet">
-    <link href="assets/css/et-line.css" rel="stylesheet">
-    <link href="assets/css/ionicons.min.css" rel="stylesheet">
-    <!-- Carousel CSS -->
-    <link href="assets/css/owl.carousel.min.css" rel="stylesheet">
-    <link href="assets/css/owl.theme.default.min.css" rel="stylesheet">
-    <!-- Animate CSS -->
-    <link rel="stylesheet" href="assets/css/animate.min.css">
-    <!-- Custom styles for this template -->
-    <link href="assets/css/main.css" rel="stylesheet">
-
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154714929-1"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'UA-154714929-1');
-    </script>
-</head>
-<body>
-<div class="loader">
-    <div class="loader-outter"></div>
-    <div class="loader-inner"></div>
-</div>
-
-<!--header start here -->
-<header class="header navbar fixed-top navbar-expand-md">
-        <div class="container">
-            <a class="navbar-brand logo" href="#">
-                <img src="assets/img/logo.png" alt="ESummit"/>
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#headernav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="lnr lnr-text-align-right"></span>
-            </button>
-            <div class="collapse navbar-collapse flex-sm-row-reverse" id="headernav">
-                <ul class=" nav navbar-nav menu">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="/">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link " href="/#Speakers">Speakers</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link " href="/#Events">Events</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link " href="/#Workshops">Workshops</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link " href="/#Contact">Contact</a>
-                    </li>
-                    <% if(!user){ %>
-                        <li class="nav-item">
-                            <a class="nav-link " href="/register">Register</a>
-                        </li>
-                    <% }else{ %>
-                        <li class="nav-item">
-                            <a class="nav-link " href="/dashboard" style="text-decoration: underline;"><%= user.first_name %></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link " href="/logout" style="text-decoration: underline;">Logout</a>
-                        </li>
-                    <% } %>   
-                    
-    
-                </ul>
-            </div>
-        </div>
-    </header>
-<!--header end here-->
-<% include ./partials/messages %>
-<!--cover section slider -->
-<section id="home" class="home-cover">
+<!-- <section id="home" class="home-cover">
         <div class="cover_slider owl-carousel owl-theme">
             <div class="cover_item" style="height: 1159px;background: url('assets/img/bg/122.jpg'); min-height: 1000px;">
                  <div class="slider_content">
@@ -96,193 +6,658 @@
                         <div class="container" style="position: relative;   top: -133px;">
                             <div style="max-width: 650px;" class="slider-content-center">
                                 
-                                <h2 class="cover-title">
-                                    Dashboard
-                                </h2>
-                                <strong class="cover-xl-text" style="font-size: 47px;">Coming Soon</strong>
-                                <p class="cover-date" style="text-decoration: underline;  margin-top: 26px;                          margin-bottom: 53px;">
-                                        <% if(!user.verify){ %>
-                                            <a style="font-size: 19px;" href="/send">Click to verify Email</a>
-                                        <% }else{ %> 
-                                            Email Verified
+                                    <form name="event-add-form" action="/dashboard/event" id="event-add-form" method="POST" >
+                                            Select your favorite fruit:
+                                            
+                                            <select id="mySelect" name="id">
+                                                <% events.forEach(x => { %>
+                                              <option value= <%= x._id %> ><%= x.name %></option>
+                                              <% }) %>                                            </select>
+                                              <input type="text" name="team_name" id="">
+
+                                              <button type="submit">Click</button>
+                                    </form>
+
+                                    
+                                    <% registeredEvents.forEach(t => { %>
+                                        <p><%= t.name %></p>
+
+                                        
+                                        <% if( t.status == false){ %>
+                                            <form id="add-member" method="get" action="/dashboard/accept-event/<%= t._id %>">
+                                            <button type="submit"> Accpet </button>
+                                            </form>
+                                            <form id="add-member" method="get" action="/dashboard/reject-event/<%= t._id %>">
+                                                <button type="submit"> Reject </button>
+                                            </form>
+
+                                            <% }else if( t.status == true){ %>
+                                                <form id="add-member" method="get" action="/dashboard/reject-event/<%= t._id %>">
+                                                    <button type="submit"> Delete </button>
+                                                </form>
+                                                    <% } %>
+
+                                                <% if(t.leader_id == user.email){ %>
+                                                    <p>Team</p>
+                                                    <% leaderEvents.forEach(o => { %>
+
+                                                        <% if(o.event_id == t.event_id && o.student_id != user.email ){ %>
+                                                            <p><%= o.student_id %></p>
+                                                            <form id="add-member" method="get" action="/dashboard/discard-event/<%= o._id %>">
+                                                                <button type="submit"> Delete </button>
+                                                            </form>
+                                                            <% } %>
+                                                    <% }) %>
+
+                                                            <br><br><br>
+                                                    
+
+                                                <% } %>
+                                                        
+
+                                        <%  }) %>
+
+
+
+                                        
+                                        <br>
+                                        <br>
+                                        <br>
+
+
+
+                                    <form id="add-member" method="post" action="/dashboard/add-member-event">
+                                            <select id="registeredEvents" name="event_id">
+                                                    <% registeredEvents.forEach(y => { %>
+                                                       <% if(user.email == y.leader_id){ %>
+                                                  <option value= <%= y.event_id %> ><%= y.name %></option>
+                                                  <% } %>
+                                                  <% }) %>                                         
+                                            </select>
+                                        <input type="text" name="email">
+                                        <button type="submit">Click</button>
+                                    </form> 
+
+                                    
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    </section> -->
+
+
+    <!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="apple-touch-icon" sizes="76x76" href="assets2/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="assets2/img/favicon.png">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>
+    ESummit'20
+  </title>
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+  <!--     Fonts and icons     -->
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+  <!-- CSS Files -->
+  <link href="assets2/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
+
+  <style type="text/css">
+    .dropdown-btn {
+  text-decoration: none;
+  display: block;
+  text-align: left;
+  cursor: pointer;
+  outline: none;
+}
+
+.workshops:hover {
+  background-color: rgba(100,200,200,0.1);
+  color: #f1f1f1;
+  cursor: pointer;
+}
+
+/* On mouse-over */
+.dropdown-btn:hover {
+  background-color: rgba(100,200,200,0.1);
+  color: #f1f1f1;
+}
+
+
+
+.dropdown-container {
+  padding-left: 20px;
+  display: none;
+
+  
+}
+#mess{
+    top: 30px!important;
+}
+  </style>
+  
+</head>
+
+<body class="dark-edition">
+  <div class="wrapper ">
+
+    <div class="sidebar" data-color="purple" data-background-color="black" data-image="assets2/img/sidebar-2.jpg">
+      <div class="logo"><a href="#" class="simple-text logo-normal">
+          ESummit'20
+        </a>
+      </div>
+
+      <div class="sidebar-wrapper">
+        <ul class="nav">
+          <li class="nav-item ">
+            <a class="nav-link profile-panel">
+              <i class="material-icons">persons</i>
+              <p>Profile</p>
+            </a>
+          </li>
+
+
+          <li class="nav-item">
+            <a class="nav-link dropdown-btn " >
+              <i class="fa fa-caret-down"></i>
+              <p>Participate</p>
+            </a>
+            
+            <div class="dropdown-container">
+
+              <a class="nav-link dropdown-btn">
+                  <i class="fa fa-caret-down"></i>
+                  <p>Events</p>
+              </a>
+            
+              <div class="dropdown-container ">
+                  
+                <% if(user.startup == false){ %>
+                <a class="nav-link workshops student-panel">
+                  <i class="material-icons">events</i>
+                  <p>Student Events</p>
+                </a>
+                <% } %>
+
+                <a class="nav-link workshops startup-panel">
+                  <i class="material-icons">events</i>
+                  <p>Startup Events</p>
+                </a>
+              </div>
+
+              
+              <a class="nav-link workshops" >
+                <i class="material-icons">work</i>
+                <p>Workshops</p>
+              </a>
+
+
+            </div>
+        </li>
+
+          <li class="nav-item ">
+            <a class="nav-link" href="/dashboard-participate">
+              <i class="material-icons">content_paste</i>
+              <p>My Participations</p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="./typography.html">
+              <i class="material-icons">schedules</i>
+              <p>Schedule</p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="./map.html">
+              <i class="material-icons">maps</i>
+              <p>Campus Map</p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="./icons.html">
+              <i class="material-icons">contacts</i>
+              <p>Contacts</p>
+            </a>
+          </li>
+          
+          <!-- <li class="nav-item active-pro ">
+                <a class="nav-link" href="./upgrade.html">
+                    <i class="material-icons">unarchive</i>
+                    <p>Upgrade to PRO</p>
+                </a>
+            </li> -->
+        </ul>
+      </div>
+    </div>
+
+
+
+
+    <div class="main-panel">
+       
+      <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top " id="navigation-example">
+        <div class="container-fluid">
+          <div class="navbar-wrapper">
+            <a class="navbar-brand" href="javascript:void(0)">Dashboard</a>
+          </div>
+         <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation" data-target="#navigation-example">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+          </button>
+        </div>
+      </nav> 
+      <% include ./partials/messages %>
+      <!-- End Navbar -->
+      <div class="content profile">
+        <div class="container-fluid">
+          
+          
+          <div class="row" >
+            <div class="col-lg-12 col-md-12">
+              <div class="card" style="padding-bottom: 50px;">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title">Profile</h4>
+                </div>
+                <div class="container-fluid">
+                    <div class="row" style="margin-top: 35px;">
+                            <div class="col-sm-6">
+                                    <label>
+                                        First Name:
+                                    </label>
+                                    <input type="text" class="form-control" name="first_name" value="<%= user.first_name %>" disabled>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>
+                                        Last Name:
+                                    </label>
+                                    <input type="text" class="form-control" name="last_name" value="<%= user.last_name %>" disabled>
+                                </div>
+                    </div>
+                    <div class="row" style="margin-top: 35px;">
+                            <div class="col-sm-6">
+                                    <label>
+                                        Email ID:
+                                    </label>
+                                    <input type="email" class="form-control"  value="<%= user.email %>" disabled>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>
+                                        Phone Number:
+                                    </label>
+                                    <input type="text" class="form-control"  value="<%= user.phone %>" disabled>
+                                </div>
+                    </div>
+                    <div class="row" style="margin-top: 35px;">
+                            <div class="col-sm-6">
+                                    <label>
+                                        College/Organisation:
+                                    </label>
+                                    <input type="type" class="form-control"  value="<%= user.college %>" disabled>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>
+                                        City:
+                                    </label>
+                                    <input type="text" class="form-control"  value="<%= user.city %>" disabled>
+                                </div>
+                    </div>
+                    <div class="row" style="    width: 80%;margin: 25px auto;">
+                            <div class="col-sm-6">
+                                <label >Are you a Student/Startup ?</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <% if(user.startup == false){ %>
+                                    <div class="form-check" style=" width: 50%; float: right;">
+                                            <input class="yo" type="radio" name="startup"  checked id="exampleRadios1" value="0" checked>
+                                            <label class="form-check-label" for="exampleRadios1">
+                                              Student
+                                            </label>
+                                    </div>
+                                    <div class="form-check" style="cursor:none;    width: 50%;  float: right;">
+                                            <input class="yo" type="radio" name="startup" disabled id="exampleRadios2" value="1">
+                                            <label style="cursor:none;" class="form-check-label" for="exampleRadios2">
+                                              Startup
+                                            </label>
+                                    </div>
+                                <% }else{ %>
+                                    <div class="form-check" style=" width: 50%; float: right;cursor: default;" >
+                                            <input class="form-check-input" type="radio" name="startup" disabled id="exampleRadios1" value="0" checked>
+                                            <label class="form-check-label" for="exampleRadios1">
+                                              Student
+                                            </label>
+                                    </div>
+                                    <div class="form-check" style="    width: 50%;  float: right;">
+                                            <input class="form-check-input" type="radio" checked name="startup"  id="exampleRadios2" value="1">
+                                            <label class="form-check-label" for="exampleRadios2">
+                                              Startup
+                                            </label>
+                                    </div>
+                                <% } %>
+                            </div>
+                                
+                        </div>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+
+
+      <div class="content student">
+        <div class="card" style="padding-bottom: 50px;">
+            <div class="card-header card-header-primary">
+                <h4 class="card-title">Team Registration</h4>
+            </div>
+            <div class="container-fluid">
+                    <form name="event-add-form" action="/dashboard/event" id="event-add-form" method="POST" >
+                        
+                        <div class="form-group" style="margin-top: 50px;">
+                                <label for="exampleInputEmail1">Student Events</label>
+                                <select class="form-control" id="mySelect" name="id">
+                                    <% events.forEach(x => { %>
+                                            <% if(x.student == true){ %>
+                                      <option value= <%= x._id %> ><%= x.name %></option>
                                             <% } %>
-                                </p>
-
-                            </div>
+                                    <% }) %>        
+                                    
+                                </select>
                         </div>
-                    </div>
-                </div>
+                        
+                        <div class="form-group" style="margin-top: 50px;">
+                            <label for="exampleInputEmail1">Team Name</label>
+                            <input type="text" class="form-control" name="team_name" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            <small id="emailHelp" class="form-text text-muted">Create your team name.</small>
+                        </div>
+    
+                        <button type="submit" style="margin-top: 30px;" class="btn btn-outline-secondary">Add Team</button>
+                </form>
+                   
+    
             </div>
+          </div>
+      </div>
+    
+    <div class="content startup">
+        <div class="card" style="padding-bottom: 50px;">
+                <div class="card-header card-header-primary">
+                    <h4 class="card-title">Team Registration</h4>
+                </div>
+        <div class="container-fluid">
+                <form name="event-add-form" action="/dashboard/event" id="event-add-form" method="POST" >
+                    
+                    <div class="form-group" style="margin-top: 50px;">
+                            <label for="exampleInputEmail1">Startup Events</label>
+                            <select class="form-control" id="mySelect" name="id">
+                                <% events.forEach(x => { %>
+                                        <% if(x.startup == true){ %>
+                                    <option value= <%= x._id %> ><%= x.name %></option>
+                                        <% } %>
+                                <% }) %>        
+                                
+                            </select>
+                    </div>
+                    
+                    <div class="form-group" style="margin-top: 50px;">
+                        <label for="exampleInputEmail1">Team Name</label>
+                        <input type="text" class="form-control" name="team_name" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <small id="emailHelp" class="form-text text-muted">Create your team name.</small>
+                    </div>
+
+                    <button type="submit" style="margin-top: 30px;" class="btn btn-outline-secondary">Add Team</button>
+            </form>
+                
+
         </div>
-    
-    </section>
-
-<!--footer start -->
-<footer>
-        <div class="container">
-            <div class="row justify-content-center">
-    
-                <div class="col-md-4 col-12">
-                    <div class="footer_box">
-                        <div class="footer_header">
-                            <div class="footer_logo">
-                                <img src="assets/img/logo.png" alt="E Summit">
-                            </div>
-                        </div>
-                        <div class="footer_box_body">
-                            <p>
-                                E-Summit is an excellent opportunity for young and aspiring entrepreneurs to turn their startup dreams into reality. It provides a perfect platform for the unsung heroes of our economy to interact with prospective investors by pitching their ideas.
-                            </p>
-                            <ul class="footer_social">
-                                <li>
-                                    <a href="https://www.linkedin.com/company/14424538"><i class="ion-social-linkedin"></i></a>
-                                </li>
-                                <li>
-                                    <a href="https://www.facebook.com/ecelliitvaranasi/"><i class="ion-social-facebook"></i></a>
-                                </li>
-                                <li>
-                                    <a href="https://twitter.com/ecelliitbhu"><i class="ion-social-twitter"></i></a>
-                                </li>
-                                <li>
-                                    <a href="https://www.instagram.com/ecelliitbhu/?hl=en"><i class="ion-social-instagram"></i></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-    
-                <div class="col-16 col-md-4">
-                    <div class="footer_box">
-                        <div class="footer_header">
-                            <h4 class="footer_title">
-                                instagram
-                            </h4>
-                        </div>
-                        <div class="footer_box_body">
-                            <ul class="instagram_list">
-                                <li>
-                                    <a>
-                                        <img src="assets/img/instagram/inst1.jpg" alt="instagram">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a>
-                                        <img src="assets/img/instagram/inst2.jpg" alt="instagram">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a >
-                                        <img src="assets/img/instagram/inst3.jpg" alt="instagram">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a>
-                                        <img src="assets/img/instagram/inst4.jpg" alt="instagram">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a>
-                                        <img src="assets/img/instagram/inst5.jpg" alt="instagram">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a>
-                                        <img src="assets/img/instagram/inst6.jpg" alt="instagram">
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-    
-                <div class="col-12 col-md-4">
-                    <div class="footer_box">
-                        <div class="footer_header">
-                            <h4 class="footer_title">
-                                Contact us
-                            </h4>
-                        </div>
-                        <div class="footer_box_body">
-    
-                            <div class="newsletter_form">
-                                <b style="color: white;">Address</b> - E-Cell, NCL-IIT (BHU) Incubation Centre, IIT(BHU) Varanasi - 221005<br>
-                                <b style="color: white;">Email us</b> - ecell@iitbhu.ac.in<br>
-                                <b style="color: white;">Convener</b> - Mayank Lakhani (+91 7800291779)<br>
-                                <b style="color: white;">Co-Convener</b> - Vicky Vijay Junghare (+91 8669023107)<br>
-                                <b style="color: white;">Co-Convener</b> - Balram Gupta (+91 8319553974)<br>
-    
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
-    </footer>
+    </div>
+      
+      <script>
+        const x = new Date().getFullYear();
+        let date = document.getElementById('date');
+        date.innerHTML = '&copy; ' + x + date.innerHTML;
+      </script>
+    </div>
+  </div>
 
 
-    <!-- jquery -->
-<script src="assets/js/jquery.min.js"></script>
-<!-- bootstrap -->
-<script src="assets/js/popper.js"></script>
-<script src="assets/js/bootstrap.min.js"></script>
-<script src="assets/js/waypoints.min.js"></script>
-<!--slick carousel -->
-<script src="assets/js/owl.carousel.min.js"></script>
-<!--parallax -->
-<script src="assets/js/parallax.min.js"></script>
-<!--Counter up -->
-<script src="assets/js/jquery.counterup.min.js"></script>
-<!--Counter down -->
-<script src="assets/js/jquery.countdown.min.js"></script>
-<!-- WOW JS -->
-<script src="assets/js/wow.min.js"></script>
-<!-- Custom js -->
-<script src="assets/js/main.js"></script>
-<script type="text/javascript">
-filterSelection("all")
-function filterSelection(c) {
-  var x, i;
-  x = document.getElementsByClassName("filterDiv");
-  if (c == "all") c = "";
-  // Add the "show" class (display:block) to the filtered elements, and remove the "show" class from the elements that are not selected
-  for (i = 0; i < x.length; i++) {
-    w3RemoveClass(x[i], "show");
-    if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
-  }
-}
-// Show filtered elements
-function w3AddClass(element, name) {
-  var i, arr1, arr2;
-  arr1 = element.className.split(" ");
-  arr2 = name.split(" ");
-  for (i = 0; i < arr2.length; i++) {
-    if (arr1.indexOf(arr2[i]) == -1) {
-      element.className += " " + arr2[i];
-    }
-  }
-}
-// Hide elements that are not selected
-function w3RemoveClass(element, name) {
-  var i, arr1, arr2;
-  arr1 = element.className.split(" ");
-  arr2 = name.split(" ");
-  for (i = 0; i < arr2.length; i++) {
-    while (arr1.indexOf(arr2[i]) > -1) {
-      arr1.splice(arr1.indexOf(arr2[i]), 1);
-    }
-  }
-  element.className = arr1.join(" ");
-}
-// Add active class to the current control button (highlight it)
-var btnContainer = document.getElementById("myBtnContainer");
-var btns = btnContainer.getElementsByClassName("mybtn");
-for (var i = 0; i < btns.length; i++) {
-  btns[i].addEventListener("click", function() {
-    var current = document.getElementsByClassName("filter active");
-    current[0].className = current[0].className.replace("active", "");
-    this.className += " active";
-  });
-}
-</script>
+
+ 
+  <!--   Core JS Files   -->
+  <script src="assets2/js/core/jquery.min.js"></script>
+  <script src="assets2/js/core/popper.min.js"></script>
+  <script src="assets2/js/core/bootstrap-material-design.min.js"></script>
+  <script src="https://unpkg.com/default-passive-events"></script>
+  <script src="assets2/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+  <!-- Place this tag in your head or just before your close body tag. -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <!--  Google Maps Plugin    -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+  <!-- Chartist JS -->
+  <script src="assets2/js/plugins/chartist.min.js"></script>
+  <!--  Notifications Plugin    -->
+  <script src="assets2/js/plugins/bootstrap-notify.js"></script>
+  <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+  <script src="assets2/js/material-dashboard.js?v=2.1.0"></script>
+  <!-- Material Dashboard DEMO methods, don't include it in your project! -->
+  <script src="assets2/demo/demo.js"></script>
+
+  <script>
+      $('.student').hide();
+      $('.startup').hide();
+      
+      $('.profile-panel').click(function() {
+        $('.student').fadeOut(1000);
+        $('.startup').fadeOut(1000);
+        $('.profile').fadeIn(2000);
+      });
+
+      $('.student-panel').click(function() {
+        $('.profile').fadeOut(1000);
+        $('.startup').fadeOut(1000);
+        $('.student').fadeIn(2000);
+      });
+      $('.startup-panel').click(function() {
+        $('.profile').fadeOut(1000);
+        $('.student').fadeOut(1000);
+        $('.startup').fadeIn(2000);
+      })
+  </script>
+  
+  <script type="text/javascript">
+    var dropdown = document.getElementsByClassName("dropdown-btn");
+    var i;
+
+    for (i = 0; i < dropdown.length; i++) {
+      dropdown[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var dropdownContent = this.nextElementSibling;
+        if (dropdownContent.style.display === "block") {
+          dropdownContent.style.display = "none";
+        } else {
+          dropdownContent.style.display = "block";
+        }
+      });
+} 
+  </script>
+  <script>
+    $(document).ready(function() {
+      $().ready(function() {
+        $sidebar = $('.sidebar');
+
+        $sidebar_img_container = $sidebar.find('.sidebar-background');
+
+        $full_page = $('.full-page');
+
+        $sidebar_responsive = $('body > .navbar-collapse');
+
+        window_width = $(window).width();
+
+        $('.fixed-plugin a').click(function(event) {
+          // Alex if we click on switch, stop propagation of the event, so the dropdown will not be hide, otherwise we set the  section active
+          if ($(this).hasClass('switch-trigger')) {
+            if (event.stopPropagation) {
+              event.stopPropagation();
+            } else if (window.event) {
+              window.event.cancelBubble = true;
+            }
+          }
+        });
+
+        $('.fixed-plugin .active-color span').click(function() {
+          $full_page_background = $('.full-page-background');
+
+          $(this).siblings().removeClass('active');
+          $(this).addClass('active');
+
+          var new_color = $(this).data('color');
+
+          if ($sidebar.length != 0) {
+            $sidebar.attr('data-color', new_color);
+          }
+
+          if ($full_page.length != 0) {
+            $full_page.attr('filter-color', new_color);
+          }
+
+          if ($sidebar_responsive.length != 0) {
+            $sidebar_responsive.attr('data-color', new_color);
+          }
+        });
+
+        $('.fixed-plugin .background-color .badge').click(function() {
+          $(this).siblings().removeClass('active');
+          $(this).addClass('active');
+
+          var new_color = $(this).data('background-color');
+
+          if ($sidebar.length != 0) {
+            $sidebar.attr('data-background-color', new_color);
+          }
+        });
+
+        $('.fixed-plugin .img-holder').click(function() {
+          $full_page_background = $('.full-page-background');
+
+          $(this).parent('li').siblings().removeClass('active');
+          $(this).parent('li').addClass('active');
+
+
+          var new_image = $(this).find("img").attr('src');
+
+          if ($sidebar_img_container.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
+            $sidebar_img_container.fadeOut('fast', function() {
+              $sidebar_img_container.css('background-image', 'url("' + new_image + '")');
+              $sidebar_img_container.fadeIn('fast');
+            });
+          }
+
+          if ($full_page_background.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
+            var new_image_full_page = $('.fixed-plugin li.active .img-holder').find('img').data('src');
+
+            $full_page_background.fadeOut('fast', function() {
+              $full_page_background.css('background-image', 'url("' + new_image_full_page + '")');
+              $full_page_background.fadeIn('fast');
+            });
+          }
+
+          if ($('.switch-sidebar-image input:checked').length == 0) {
+            var new_image = $('.fixed-plugin li.active .img-holder').find("img").attr('src');
+            var new_image_full_page = $('.fixed-plugin li.active .img-holder').find('img').data('src');
+
+            $sidebar_img_container.css('background-image', 'url("' + new_image + '")');
+            $full_page_background.css('background-image', 'url("' + new_image_full_page + '")');
+          }
+
+          if ($sidebar_responsive.length != 0) {
+            $sidebar_responsive.css('background-image', 'url("' + new_image + '")');
+          }
+        });
+
+        $('.switch-sidebar-image input').change(function() {
+          $full_page_background = $('.full-page-background');
+
+          $input = $(this);
+
+          if ($input.is(':checked')) {
+            if ($sidebar_img_container.length != 0) {
+              $sidebar_img_container.fadeIn('fast');
+              $sidebar.attr('data-image', '#');
+            }
+
+            if ($full_page_background.length != 0) {
+              $full_page_background.fadeIn('fast');
+              $full_page.attr('data-image', '#');
+            }
+
+            background_image = true;
+          } else {
+            if ($sidebar_img_container.length != 0) {
+              $sidebar.removeAttr('data-image');
+              $sidebar_img_container.fadeOut('fast');
+            }
+
+            if ($full_page_background.length != 0) {
+              $full_page.removeAttr('data-image', '#');
+              $full_page_background.fadeOut('fast');
+            }
+
+            background_image = false;
+          }
+        });
+
+        $('.switch-sidebar-mini input').change(function() {
+          $body = $('body');
+
+          $input = $(this);
+
+          if (md.misc.sidebar_mini_active == true) {
+            $('body').removeClass('sidebar-mini');
+            md.misc.sidebar_mini_active = false;
+
+            $('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar();
+
+          } else {
+
+            $('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar('destroy');
+
+            setTimeout(function() {
+              $('body').addClass('sidebar-mini');
+
+              md.misc.sidebar_mini_active = true;
+            }, 300);
+          }
+
+          // we simulate the window Resize so the charts will get updated in realtime.
+          var simulateWindowResize = setInterval(function() {
+            window.dispatchEvent(new Event('resize'));
+          }, 180);
+
+          // we stop the simulation of Window Resize after the animations are completed
+          setTimeout(function() {
+            clearInterval(simulateWindowResize);
+          }, 1000);
+
+        });
+      });
+    });
+  </script>
+  <script>
+    $(document).ready(function() {
+      // Javascript method's body can be found in assets/js/demos.js
+      md.initDashboardPageCharts();
+
+    });
+  </script>
 </body>
+
 </html>

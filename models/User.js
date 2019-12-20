@@ -1,19 +1,19 @@
 var mongoose = require("mongoose");
 var passportLocalMongoose = require("passport-local-mongoose");
-var ids = require('short-id');
+/* var ids = require('short-id');
 
 ids.configure({
-  length: 5,          // The length of the id strings to generate
-  algorithm: 'sha1',  // The hashing algoritm to use in generating keys
-  salt: Math.random   // A salt value or function
-});
+  length: 5,          
+  algorithm: 'sha1',  
+  salt: Math.random   
+}); */
 
 
 var userSchema = new mongoose.Schema({
-  id: {
+/*   id: {
     type: String,
     default: "ES-" + ids.generate()
-  },
+  }, */
   first_name: {
     type: String,
     required: true
@@ -56,8 +56,16 @@ var userSchema = new mongoose.Schema({
   },
   link : [{
     type : Number
-  }]
-  });
+  }],
+  startup : {
+    type : Boolean,
+    default : false
+  },
+  esummit_id : {
+    type : Boolean,
+    default : null
+  }
+})
 
   userSchema.plugin(passportLocalMongoose);
 
