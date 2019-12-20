@@ -248,7 +248,7 @@ tbody td{
                                                     </form>
                                                 </td>
                                             <% } %>
-                                            <% if((p.leader_id != user.email && p.student_id== user.email)  ||  (p.student_id != p.leader_id)){ %>
+                                            <% if((p.leader_id != user.email && p.student_id== user.email)  ||  (p.student_id != p.leader_id && p.student_id == user.email)){ %>
                                                 <td>
                                                     <form id="add-member" method="get" action="/dashboard/reject-event/<%= p._id %>">
                                                         <button style="background-color: #d52c2c;" type="submit" class="btn btn-outline-danger"> Delete </button>

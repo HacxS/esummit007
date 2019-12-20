@@ -435,6 +435,24 @@ router.get("/logout",  function(req, res) {
 
 
 
+router.get("/dwwqdwd", (req, res) => {
+  User.find({}, (err, result) => {
+    var len = result.length;
+    console.log(len)
+    var i =1;
+    result.forEach(x => {
+      if(!x.startup){
+        User.findByIdAndUpdate(x._id, {$set:{startup:false}}, (err, rest) => {
+          console.log("1")
+          if(i==len){
+            res.status("success");
+          }
+          i++;
+        })
+      }
+    });
+  })
+})
 
 
  module.exports = router;
