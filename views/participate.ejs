@@ -235,7 +235,11 @@ tbody td{
                                         <% if(o.team_name == t.team_name){ %>
                                             <% o.data.forEach(p => { %>
                                             <tr>
-                                                <td><%= p.student_id %></td>
+                                                <td>
+                                                    <% if(p.student_id == user.email){ %>
+                                                        <i style="position: relative;top: 6px;" class="material-icons">persons</i>
+                                                        <% } %>
+                                                    <%= p.student_id %></td>
                                             <% if(p.leader_id == p.student_id){ %>
                                                 <td>Leader</td>
                                             <% }else{ %>
