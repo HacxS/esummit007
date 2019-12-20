@@ -9,6 +9,13 @@ z-index: 99;
 left: 12%;
 }
 
+@media (max-width: 500px) {
+  #mess{
+    left: 12%;
+    height: 64px;
+  }
+}
+
 </style>
 <% if(typeof errors != 'undefined'){ %> <% errors.forEach(function(error) { %>
 <div id="mess" class="alert alert-warning alert-dismissible fade show" role="alert" style="width: 75%;margin: 10px auto;height: 50px;">

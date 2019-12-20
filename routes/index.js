@@ -21,13 +21,11 @@ var smtpTransport = nodemailer.createTransport({
       pass: process.env.PASSWORD  ||keys.admin.password
   }
 });
-
 var rand, link;
 
 router.get('/send', middleware.checkEmailVerification, middleware.ensureAuthenticated, (req, res) => {
   rand=Math.floor((Math.random() * 100000) + 54);
   link="https://"+req.get('host')+"/verify?id="+rand+"&email="+req.user.email;
-  console.log(link)
   arr = []
   User.findOne({email: req.user.email}, (err, user)=> {
     if(err){
@@ -55,7 +53,6 @@ router.get('/send', middleware.checkEmailVerification, middleware.ensureAuthenti
               res.redirect('/dashboard');
             }
             else{
-                console.log("Message sent: " + response.message);
                 req.flash('success_msg','Email Sent Successfuly');
                 res.redirect('/dashboard');
             }
@@ -166,34 +163,33 @@ router.get('/dashboard', middleware.ensureAuthenticated , (req,res) => {
 
 router.get('/dashboard-participate', middleware.ensureAuthenticated , (req,res) => {  
 
-    EventRegister.find({ student_id : req.user.email}, (err, result) => {
-      if(err)res.send("Error");
-      else{
+  EventRegister.find({ student_id : req.user.email}, (err, result) => {
+    if(err)res.send("Error");
+    else{
+      if(result.length > 0){
         arr =[]
         var len = result.length;
         var i=1;
-        result.forEach(x => {
+        result.forEach(a => {
           EventRegister.find({ team_name : a.team_name}, (err2, result2) => {
             if(err2)res.send("Error2");
             else{
-              arr.push(result2);
+              arr.push({ team_name : a.team_name, data : result2 });
+            }
+            if(i==len){
+              res.render("participate", { user : req.user, registeredEvents : result, allteam : arr });
             }
             i++;
-            if(i==len){
-              res.render("participate", { user : req.user, registeredEvents : result, allteam : result2 });
-            }
-        });
-
-
-      })
+          });
+        })
       }
-      
-      
-      
-    
+      else{
+        res.render("participate", { user : req.user, registeredEvents : result, allteam : [] });
+      }
+     
+    }
   })
-})
-
+});
 
 router.post('/dashboard/event', middleware.ensureAuthenticated , (req,res) => {
   var event_id = req.body.id;
@@ -202,59 +198,73 @@ router.post('/dashboard/event', middleware.ensureAuthenticated , (req,res) => {
   var student_id = req.user.email;
   var status = true;
   var team_name = req.body.team_name;
-
   Event.findOne({_id : event_id}, (err, result) => {
-    console.log(result)
     name = result.name;
     var newEventRegister = new EventRegister({ event_id, name, team_name, leader_id, student_id, status});
     newEventRegister.save().then(newEvent => {
       req.flash('success_msg','You have registered this event');
-      res.redirect('/dashboard');
+      res.redirect('/dashboard-participate');
       })
   })
-  
 });
 
-router.post('/dashboard/add-member-event', middleware.ensureAuthenticated , (req,res) => {
-  var event_id = req.body.event_id;
+router.post('/dashboard/add-member-event/:id/:name', middleware.ensureAuthenticated , (req,res) => {
+  var event_id = req.params.id;
   var leader_id = req.user.email;
   var student_id = req.body.email;
   var name = null;
-  var team_name = "T";
-  console.log("11")
-  Event.findOne({_id : event_id}, (err, result) => {
-    name = result.name;
-    console.log("22")
-    User.findOne({email : student_id}, (err, result) => {
-      if(err)res.send("Error")
-      else {
-        console.log("33")
-        if(result){
-          console.log("**")
-          var newEventRegister = new EventRegister({ event_id, team_name, name, leader_id, student_id});
-          newEventRegister.save().then(newEvent => {
-            console.log("44")
-            req.flash('success_msg','You have registered this event');
-            res.redirect('/dashboard-participate');
-            })
-        }
-        else{
-          console.log("//")
-          req.flash('success_msg','Email Id does not exist');
+  var team_name = req.params.name;
+  if(student_id != req.user.email){
+    EventRegister.find({ team_name : team_name}, (error, result2) => {
+      if(error)res.send("Error");
+      else{
+        if(result2.length >=4){
+          req.flash('error_msg','You can add upto 4 members only');
           res.redirect('/dashboard-participate');
         }
+        else{
+          var flag = 0;
+          result2.forEach(x => {
+            if(x.student_id == student_id){
+              flag = 1;
+              req.flash('error_msg','You have already added this member');
+              res.redirect('/dashboard-participate');
+            }
+          });
+          if(flag == 0){
+            Event.findOne({_id : event_id}, (err, result) => {
+              name = result.name;
+              User.findOne({email : student_id}, (err, result) => {
+                if(err)res.send("Error")
+                else {
+                  if(result){
+                    var newEventRegister = new EventRegister({ event_id, team_name, name, leader_id, student_id});
+                    newEventRegister.save().then(newEvent => {
+                      req.flash('success_msg','You have added a member');
+                      res.redirect('/dashboard-participate');
+                      })
+                  }
+                  else{
+                    req.flash('success_msg','Email Id does not exist');
+                    res.redirect('/dashboard-participate');
+                  }
+                }
+              })
+            });
+          }
+        }
       }
-    })
-  });
-
-  
-  
+    }); 
+  }
+  else{
+    req.flash('error_msg','You cannot add yourself');
+    res.redirect('/dashboard-participate');
+  }
 });
 
 
 router.get('/dashboard/accept-event/:id', middleware.ensureAuthenticated , (req,res) => {
   var event_register_id = req.params.id;
-
   EventRegister.findOne({_id : event_register_id }, (err, event) => {
     if(err){
       res.send({error : "Error Occured due to accpetance"})
@@ -267,35 +277,33 @@ router.get('/dashboard/accept-event/:id', middleware.ensureAuthenticated , (req,
           }
           else{
                 req.flash('success_msg','You have accpeted the event');
-                res.redirect('/dashboard');
+                res.redirect('/dashboard-participate');
           }
         })
       }
       else{
-            req.flash('success_msg','Event cannot be rejected');
+            req.flash('success_msg','Event cannot be accepted');
             res.redirect('/dashboard');
       }
     }
   });
 });
 
-
 router.get('/dashboard/reject-event/:id', middleware.ensureAuthenticated , (req,res) => {
   var event_register_id = req.params.id;
-
   EventRegister.findOne({_id : event_register_id }, (err, event) => {
     if(err){
       res.send({error : "Error Occured due to deletion"})
     }
     else{
-      if(event.student_id == req.user.email){
+      if(event.student_id == req.user.email || event.leader_id == req.user.email){
         EventRegister.findByIdAndRemove({_id : event_register_id }, (err, event) => {
           if(err){
             res.send({error : "Error Occured due to deletion"})
           }
           else{
                 req.flash('success_msg','You have rejected the event');
-                res.redirect('/dashboard');
+                res.redirect('/dashboard-participate');
           }
         })
       }
@@ -307,31 +315,12 @@ router.get('/dashboard/reject-event/:id', middleware.ensureAuthenticated , (req,
   });
 });
 
-router.get('/dashboard/discard-event/:id', middleware.ensureAuthenticated , (req,res) => {
-  var event_register_id = req.params.id;
-
-  EventRegister.findOne({_id : event_register_id }, (err, event) => {
-    if(err){
-      res.send({error : "Error Occured due to deletion"})
-    }
-    else{
-      if(event.leader_id == req.user.email){
-        EventRegister.findByIdAndRemove({_id : event_register_id }, (err, event) => {
-          if(err){
-            res.send({error : "Error Occured due to deletion"})
-          }
-          else{
-                req.flash('success_msg','You have removed the event');
-                res.redirect('/dashboard');
-          }
-        })
-      }
-      else{
-            req.flash('success_msg','Event cannot be rejected');
-            res.redirect('/dashboard');
-      }
-    }
-  });
+router.get('/dashboard/discard-event/:name', middleware.ensureAuthenticated , (req,res) => {
+  var team_name = req.params.name;
+  EventRegister.deleteMany({ team_name : team_name }, (err, rest) => {
+    req.flash('success_msg','You have deleted the event');
+    res.redirect('/dashboard-participate');
+  })
 });
 
 router.post('/event-post', (req, res) => {
@@ -340,17 +329,10 @@ router.post('/event-post', (req, res) => {
   var student = false;
   var newEvent = new Event({name, student, startup});
   newEvent.save().then(newEvent => {
-    console.log("++")
     req.flash('success_msg','You have created a event');
     res.redirect('/tab');
     });
 });
-
-router.get('/tab' , (req, res) => {
-  res.render('tab')
-})
-
-
 
 // Register
 router.post('/register', (req, res) => {
@@ -377,14 +359,11 @@ router.post('/register', (req, res) => {
       res.render('register', { errors, email, password  });
     }
     else {
-      console.log(refer.referal[0].referal_code);
       var flag =0;
-      console.log(referal_from + "==");
       
       if(referal_from !=null){
         refer.referal.forEach(x => {
           if(x.referal_code == referal_from){
-            console.log(x.referal_code);
             flag =1;
             User.findOne({ email: email }).then(user => {
               if (user) {
@@ -437,7 +416,6 @@ router.post('/register', (req, res) => {
       }
     }
   });
-
 
 router.post('/login', (req, res, next) => {
     passport.authenticate('local', {

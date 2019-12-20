@@ -207,24 +207,37 @@
               <p>My Participations</p>
             </a>
           </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="./typography.html">
+          <li class="nav-item schedule-panel">
+            <a class="nav-link" >
               <i class="material-icons">schedules</i>
               <p>Schedule</p>
             </a>
           </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="./map.html">
+          <li class="nav-item campus-panel">
+            <a class="nav-link" >
               <i class="material-icons">maps</i>
               <p>Campus Map</p>
             </a>
           </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="./icons.html">
+          <li class="nav-item contact-panel">
+            <a class="nav-link" >
               <i class="material-icons">contacts</i>
               <p>Contacts</p>
             </a>
           </li>
+          <li class="nav-item ">
+                <a class="nav-link" href="/">
+                  <i class="material-icons">home</i>
+                  <p>Home</p>
+                </a>
+            </li>
+
+            <li class="nav-item ">
+                <a class="nav-link" href="/logout">
+                    <i class="material-icons">logout</i>
+                    <p>Logout</p>
+                </a>
+            </li>
           
           <!-- <li class="nav-item active-pro ">
                 <a class="nav-link" href="./upgrade.html">
@@ -420,6 +433,18 @@
         </div>
         </div>
     </div>
+
+    <div class="content schedule">
+        <h3>Coming Soon!!!</h3>
+    </div>
+
+    <div class="content campus">
+        <h3>Coming Soon!!!</h3>
+    </div>
+
+    <div class="content contact">
+        <h3>Coming Soon!!!</h3>
+    </div>
       
       <script>
         const x = new Date().getFullYear();
@@ -456,21 +481,55 @@
       $('.startup').hide();
       
       $('.profile-panel').click(function() {
-        $('.student').fadeOut(1000);
-        $('.startup').fadeOut(1000);
-        $('.profile').fadeIn(2000);
+        $('.student').fadeOut();
+        $('.startup').fadeOut();
+        $('.campus').fadeOut();
+        $('.schedule').fadeOut();
+        $('.contact').fadeOut();
+        $('.profile').fadeIn();
       });
 
       $('.student-panel').click(function() {
-        $('.profile').fadeOut(1000);
-        $('.startup').fadeOut(1000);
-        $('.student').fadeIn(2000);
+        $('.profile').fadeOut();
+        $('.startup').fadeOut();
+        $('.campus').fadeOut();
+        $('.schedule').fadeOut();
+        $('.contact').fadeOut();
+        $('.student').fadeIn();
       });
       $('.startup-panel').click(function() {
-        $('.profile').fadeOut(1000);
-        $('.student').fadeOut(1000);
-        $('.startup').fadeIn(2000);
-      })
+        $('.profile').fadeOut();
+        $('.student').fadeOut();
+        $('.campus').fadeOut();
+        $('.schedule').fadeOut();
+        $('.contact').fadeOut();
+        $('.startup').fadeIn();
+      });
+      $('.schedule-panel').click(function() {
+        $('.profile').fadeOut();
+        $('.student').fadeOut();
+        $('.startup').fadeout();
+        $('.schedule').fadeOut();
+        $('.contact').fadeOut();
+        $('.schedule').fadeIn();
+      });
+      $('.contact-panel').click(function() {
+        $('.profile').fadeOut();
+        $('.student').fadeOut();
+        $('.startup').fadeout();
+        $('.schedule').fadeOut();
+        $('.campus').fadeOut();
+        $('.contact').fadeIn();
+      });
+      $('.campus-panel').click(function() {
+        $('.profile').fadeOut();
+        $('.student').fadeOut();
+        $('.startup').fadeout();
+        $('.schedule').fadeOut();
+        $('.contact').fadeOut();
+        $('.campus').fadeIn();
+      });
+      
   </script>
   
   <script type="text/javascript">

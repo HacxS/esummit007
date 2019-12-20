@@ -38,7 +38,12 @@
   background-color: rgba(100,200,200,0.1);
   color: #f1f1f1;
 }
-
+#mess{
+    left: 30%!important;
+    height: 55px!important;
+    width: 55%!important;
+    top: 38px!important;
+  }
 
 
 .dropdown-container {
@@ -46,6 +51,29 @@
   display: none;
 
   
+}
+
+.add-mem{
+    width: 50%;
+    margin: 10px auto;
+}
+
+@media (max-width: 500px) {
+  .add-mem{
+    width: 100%;
+  }
+
+  .delete-event{
+    padding: 12px 20px;
+    margin-top: 15px;
+  }
+  .btn-outline-danger{
+    padding: 12px 20px!important;
+  }
+}
+
+tbody td{
+    color: white!important;
 }
 
   </style>
@@ -72,7 +100,7 @@
 
 
           <li class="nav-item">
-            <a class="nav-link dropdown-btn ">
+            <a class="nav-link dropdown-btn" href="/dashboard">
               <i class="fa fa-caret-down"></i>
               <p>Participate</p>
             </a>
@@ -106,7 +134,7 @@
         </li>
 
           <li class="nav-item ">
-            <a class="nav-link" href="./tables.html">
+            <a class="nav-link" href="/dashboard-participate">
               <i class="material-icons">content_paste</i>
               <p>My Participations</p>
             </a>
@@ -130,12 +158,19 @@
             </a>
           </li>
           
-          <!-- <li class="nav-item active-pro ">
-                <a class="nav-link" href="./upgrade.html">
-                    <i class="material-icons">unarchive</i>
-                    <p>Upgrade to PRO</p>
+          <li class="nav-item ">
+                <a class="nav-link" href="/">
+                  <i class="material-icons">home</i>
+                  <p>Home</p>
                 </a>
-            </li> -->
+            </li>
+
+            <li class="nav-item ">
+                <a class="nav-link" href="/logout">
+                    <i class="material-icons">logout</i>
+                    <p>Logout</p>
+                </a>
+            </li>
         </ul>
       </div>
     </div>
@@ -160,70 +195,103 @@
         </div>
       </nav> 
       <!-- End Navbar -->
-      <div class="content mypart">
+        <div class="content mypart">
             <div class="card" style="padding-bottom: 50px;color: white;">
-                    <div class="card-header card-header-primary">
-                        <h4 class="card-title">Your Participations</h4>
-                    </div>
-                    <div class="container-fluid">
-                                              
-                <% registeredEvents.forEach(t => { %>
-                    <p><%= t.name %></p>
-
-                    <p><%= t.team_name %></p>
-                    
-                    <% if( t.status == false){ %>
-                        <form id="add-member" method="get" action="/dashboard/accept-event/<%= t._id %>">
-                        <button type="submit"> Accpet </button>
-                        </form>
-                        <form id="add-member" method="get" action="/dashboard/reject-event/<%= t._id %>">
-                            <button type="submit"> Reject </button>
-                        </form>
-
-                        <% }else if( t.status == true){ %>
-                            <form id="add-member" method="get" action="/dashboard/reject-event/<%= t._id %>">
-                                <button type="submit"> Delete </button>
-                            </form>
-                                <% } %>
-
-                            <% if(t.leader_id == user.email){ %>
-                                <p>Team</p>
-                                <p><%= user.first_name %> <%= user.last_name %> </p>
-
-                                <% leaderEvents.forEach(o => { %>
-
-                                    <% if(o.event_id == t.event_id && o.student_id != user.email ){ %>
-                                        <p><%= o.student_id %></p>
-                                        <form id="add-member" method="get" action="/dashboard/discard-event/<%= o._id %>">
-                                            <button type="submit"> Delete </button>
-                                        </form>
-                                        <% } %>
-                                <% }) %>
-
-                                        <br><br><br>
-                                        Add  Member
-
-                                        
-                                    </form> 
-
-                            <% } %>
+                <div class="card-header card-header-primary">
+                    <h4 class="card-title">Registered events details</h4>
+                    <p class="card-category">Note: If you are the leader of the team, then deleting/leaving the team would dissolve the entire team. </p>
+                </div>
+                <div class="container-fluid">
+                    <% registeredEvents.forEach(t => { %>
+                        <div class="row" style="    margin-top: 30px;font-size: 24px;text-align: center;">
+                            <div class="col-6">
                                     
+                                    <small style="font-size: 12px;text-decoration: underline;color:#8b92a9 ;">Event Name</small>
+                                    <p style="margin: 0;    margin-top: 3px;"><%= t.name %></p>
+                            </div>
+                            <div class="col-6 ">
+                                    
+                                    <small style="font-size: 12px;text-decoration: underline;color: #8b92a9;">Team Name</small>
+                                    <p style="margin: 0;    margin-top: 3px;"><%= t.team_name %></p> 
+                            </div>
+                        </div>
+                            
+        
+                              
+                            
+                        
+                        <br>
+                        <p style="font-size: 25px;  margin: 0;margin-top: 15px;  text-align: center;color: #8b92a9;  text-decoration: underline;">Team</p>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead class=" text-primary">
+                                        <th>Email ID</th>
+                                        <th>Position</th>
+                                        <th>Action</th>
+                                    </thead>
+                                    <tbody>
+                                    <% allteam.forEach(o => { %>
+                                        <% if(o.team_name == t.team_name){ %>
+                                            <% o.data.forEach(p => { %>
+                                            <tr>
+                                                <td><%= p.student_id %></td>
+                                            <% if(p.leader_id == p.student_id){ %>
+                                                <td>Leader</td>
+                                            <% }else{ %>
+                                                <td>Participant</td>
+                                            <% } %>
+                                            <% if(p.student_id == user.email && p.status==false){ %>
+                                                <td class="text-primary">
+                                                    <form id="add-member" method="get" action="/dashboard/accept-event/<%= t._id %>">
+                                                        <button type="submit" style="background-color: #70ae26;" class="btn btn-outline-success"> Accpet </button>
+                                                    </form>
+                                                </td>
+                                            <% } %>
+                                            <% if((p.leader_id != user.email && p.student_id== user.email)  ||  (p.student_id != p.leader_id)){ %>
+                                                <td>
+                                                    <form id="add-member" method="get" action="/dashboard/reject-event/<%= p._id %>">
+                                                        <button style="background-color: #d52c2c;" type="submit" class="btn btn-outline-danger"> Delete </button>
+                                                    </form>
+                                                </td>
+                                            <% } %>
+                                            </tr>
+                                            <% }) %>
+                                            <!-- <p> <%= o.data.length %></p> -->
+                                        <% } %>
+                                    <% }) %> 
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div> 
 
+                        <% if(user.email == t.leader_id){ %>
+                        <form id="add-member" method="post" action="/dashboard/add-member-event/<%= t.event_id %>/<%= t.team_name%>">
+                            <div class="form-group add-mem">
+                                <label for="exampleInputEmail1">Add  Member</label>
+                                <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                <small id="emailHelp" class="form-text text-muted">Enter email id of your friend.</small>
+                                <button type="submit" class="btn btn-outline-light" >Add</button>
+                            </div>
+                        </form>
+                        <% } %>
+
+                        <% if( t.leader_id == user.email ){ %>
+                            <form id="add-member" method="get" style="width: max-content; margin: 10px auto;" action="/dashboard/discard-event/<%= t.team_name %>">
+                                <button style="background-color: #d52c2c;" type="submit" class="delete-event btn btn-outline-danger"> Delete Event </button>
+                            </form>
+                        <% } %>
+                        <hr style="border: 1px solid #8026a1;">
                     <%  }) %>
 
-                    <form id="add-member" method="post" action="/dashboard/add-member-event">
-                        <select id="registeredEvents" name="event_id">
-                                <% registeredEvents.forEach(y => { %>
-                                   <% if(user.email == y.leader_id){ %>
-                              <option value= <%= y.event_id %> ><%= y.name %></option>
-                              <% } %>
-                              <% }) %>                                         
-                        </select>
-                    <input type="text" name="email">
-                    <button type="submit">Click</button>
+                    <% if(registeredEvents.length == 0){ %>
+                        <h3 style="text-align: center;font-size: 19px;">You have not added any events yet.</h3>
+                    <% } %>
+            
+                
+                </div>
+            </div>
         </div>
-      </div>
-      </div>
 
      
       <script>
