@@ -195,7 +195,7 @@ tbody td{
         </div>
       </nav> 
       <!-- End Navbar -->
-        <div class="content mypart">
+        <div class="content mypart" style="min-height:auto;">
             <div class="card" style="padding-bottom: 50px;color: white;">
                 <div class="card-header card-header-primary">
                     <h4 class="card-title">Registered events details</h4>
@@ -215,11 +215,7 @@ tbody td{
                                     <p style="margin: 0;    margin-top: 3px;"><%= t.team_name %></p> 
                             </div>
                         </div>
-                            
         
-                              
-                            
-                        
                         <br>
                         <p style="font-size: 25px;  margin: 0;margin-top: 15px;  text-align: center;color: #8b92a9;  text-decoration: underline;">Team</p>
                         <div class="card-body">
@@ -297,7 +293,42 @@ tbody td{
             </div>
         </div>
 
-     
+           <!-- End Navbar -->
+           <div class="content mypart workshop">
+                <div class="card" style="padding-bottom: 50px;color: white;">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title">Registered workshop details</h4>
+                        <p class="card-category">Note: There is no team formation in workshops. </p>
+                    </div>
+                    <div class="container-fluid">
+                            <% registeredWorkshops.forEach(t => { %>
+                                <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead class=" text-primary">
+                                                    <th>Workshop Name</th>
+                                                    <th>Student Name</th>
+                                                    <th>Action</th>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><%= t.workshop_name %></td>
+                                                        <td><%= user.first_name %></td>
+                                                        <td>
+                                                            <form id="add-member" method="get" action="/dashboard/reject-workshop/<%= t._id %>">
+                                                                <button style="background-color: #d52c2c;" type="submit" class="btn btn-outline-danger"> Delete </button>
+                                                            </form>
+                                                        </td>
+                                                    </tr>
+
+                            <% }) %>
+
+                            <% if(registeredWorkshops.length == 0){ %>
+                                <h3 style="text-align: center;font-size: 19px;">You have not added any workshops yet.</h3>
+                            <% } %>
+                    </div>
+                </div>
+           </div>
       <script>
         const x = new Date().getFullYear();
         let date = document.getElementById('date');

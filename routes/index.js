@@ -166,26 +166,35 @@ router.get('/dashboard-participate', middleware.ensureAuthenticated , (req,res) 
   EventRegister.find({ student_id : req.user.email}, (err, result) => {
     if(err)res.send("Error");
     else{
-      if(result.length > 0){
-        arr =[]
-        var len = result.length;
-        var i=1;
-        result.forEach(a => {
-          EventRegister.find({ team_name : a.team_name}, (err2, result2) => {
-            if(err2)res.send("Error2");
-            else{
-              arr.push({ team_name : a.team_name, data : result2 });
-            }
-            if(i==len){
-              res.render("participate", { user : req.user, registeredEvents : result, allteam : arr });
-            }
-            i++;
-          });
-        })
-      }
-      else{
-        res.render("participate", { user : req.user, registeredEvents : result, allteam : [] });
-      }
+      WorkshopRegister.find({email : req.user.email}, (err4, result4) => {
+        if(err4)res.send("Error");
+        else{
+          if(result.length > 0){
+            arr =[]
+            var len = result.length;
+            var i=1;
+            result.forEach(a => {
+              EventRegister.find({ team_name : a.team_name}, (err2, result2) => {
+                if(err2)res.send("Error2");
+                else{
+                  arr.push({ team_name : a.team_name, data : result2 });
+                }
+                if(i==len){
+                  
+                      console.log(result4);
+                      res.render("participate", { user : req.user, registeredEvents : result, allteam : arr, registeredWorkshops : result4 });
+                    
+                  
+                }
+                i++;
+              });
+            })
+          }
+          else{
+            res.render("participate", { user : req.user, registeredEvents : result, allteam : [], registeredWorkshops : result4  });
+          }
+        }
+      })
      
     }
   })
@@ -217,11 +226,22 @@ router.post('/dashboard/workshop', middleware.ensureAuthenticated , (req,res) =>
   WorkshopRegister.findOne({email : email}, (err, result) => {
     console.log(result)
     if(!result){
-      var newWorkshopRegister = new WorkshopRegister({ workshop_id, workshop_name, name, email});
-      newWorkshopRegister.save().then(newWorkshopRegister => {
-        req.flash('success_msg','You have registered this workshop');
-        res.redirect('/dashboard-participate');
-        })
+      Workshop.findById(workshop_id, (er, rr) =>{
+        if(er)res.send("Error");
+        else{
+          workshop_name = rr.name;
+          var newWorkshopRegister = new WorkshopRegister({ workshop_id, workshop_name, name, email});
+          console.log(newWorkshopRegister)
+          newWorkshopRegister.save().then(newWorkshopRegister => {
+            req.flash('success_msg','You have registered this workshop');
+            res.redirect('/dashboard-participate#workshop');
+            })
+        }
+      })
+    }
+    else{
+      req.flash('success_msg','You have already registered that workshop.');
+      res.redirect('/dashboard-participate');
     }
     
   })
@@ -332,6 +352,19 @@ router.get('/dashboard/reject-event/:id', middleware.ensureAuthenticated , (req,
       }
     }
   });
+});
+
+router.get('/dashboard/reject-workshop/:id', middleware.ensureAuthenticated , (req,res) => {
+  var event_register_id = req.params.id;
+  WorkshopRegister.findByIdAndRemove({_id : event_register_id }, (err, event) => {
+    if(err){
+      res.send({error : "Error Occured due to deletion"})
+    }
+    else{
+          req.flash('success_msg','You have deleted the workshop');
+          res.redirect('/dashboard-participate');
+    }
+  })
 });
 
 router.get('/dashboard/discard-event/:name', middleware.ensureAuthenticated , (req,res) => {
