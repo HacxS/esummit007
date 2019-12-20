@@ -4,7 +4,6 @@ var passportLocalMongoose = require("passport-local-mongoose");
 
 
 var eventSchema = new mongoose.Schema({
-
   name: {
     type: String,
     required: true

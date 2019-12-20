@@ -208,6 +208,25 @@ router.post('/dashboard/event', middleware.ensureAuthenticated , (req,res) => {
   })
 });
 
+router.post('/dashboard/workshop', middleware.ensureAuthenticated , (req,res) => {
+  var workshop_id = req.body.id;
+  var workshop_name = null;
+  var email = req.user.email;
+  var name = req.user.first_name + req.user.last_name;
+
+  WorkshopRegister.findOne({email : email}, (err, result) => {
+    console.log(result)
+    if(!result){
+      var newWorkshopRegister = new WorkshopRegister({ workshop_id, workshop_name, name, email});
+      newWorkshopRegister.save().then(newWorkshopRegister => {
+        req.flash('success_msg','You have registered this workshop');
+        res.redirect('/dashboard-participate');
+        })
+    }
+    
+  })
+});
+
 router.post('/dashboard/add-member-event/:id/:name', middleware.ensureAuthenticated , (req,res) => {
   var event_id = req.params.id;
   var leader_id = req.user.email;
@@ -325,14 +344,15 @@ router.get('/dashboard/discard-event/:name', middleware.ensureAuthenticated , (r
 
 router.post('/event-post', (req, res) => {
   var name = req.body.name;
-  var startup = true;
-  var student = false;
-  var newEvent = new Event({name, student, startup});
-  newEvent.save().then(newEvent => {
-    req.flash('success_msg','You have created a event');
+  var newWorkshop = new Workshop({name});
+  newWorkshop.save().then(newWorkshop => {
+    req.flash('success_msg','You have created a workshop');
     res.redirect('/tab');
     });
 });
+router.get("/tab",  function(req, res) {
+  res.render('tab')
+})
 
 // Register
 router.post('/register', (req, res) => {

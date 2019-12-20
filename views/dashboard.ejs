@@ -192,7 +192,7 @@
               </div>
 
               
-              <a class="nav-link workshops" >
+              <a class="nav-link workshops workshop-panel" >
                 <i class="material-icons">work</i>
                 <p>Workshops</p>
               </a>
@@ -433,6 +433,36 @@
         </div>
         </div>
     </div>
+    <div class="content workshop">
+            <div class="card" style="padding-bottom: 50px;">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title">Workshop Registration</h4>
+                    </div>
+            <div class="container-fluid">
+                    <form name="event-add-form" action="/dashboard/workshop" id="event-add-form" method="POST" >
+                        
+                        <div class="form-group" style="margin-top: 50px;">
+                                <label for="exampleInputEmail1">Workshops</label>
+                                <select class="form-control" id="mySelect" name="id">
+                                    <% workshops.forEach(x => { %>
+                                            
+                                        <option value= <%= x._id %> ><%= x.name %></option>
+                                            
+                                    <% }) %>        
+                                    
+                                </select>
+                        </div>
+                        
+                        
+    
+                        <button type="submit" style="margin-top: 30px;" class="btn btn-outline-secondary">Register Workshop</button>
+                </form>
+                    
+    
+            </div>
+            </div>
+        </div>
+
 
     <div class="content schedule">
         <h3>Coming Soon!!!</h3>
@@ -486,6 +516,7 @@
         $('.campus').fadeOut();
         $('.schedule').fadeOut();
         $('.contact').fadeOut();
+        $('.workshop').fadeOut();
         $('.profile').fadeIn();
       });
 
@@ -493,6 +524,7 @@
         $('.profile').fadeOut();
         $('.startup').fadeOut();
         $('.campus').fadeOut();
+        $('.workshop').fadeOut();
         $('.schedule').fadeOut();
         $('.contact').fadeOut();
         $('.student').fadeIn();
@@ -501,6 +533,7 @@
         $('.profile').fadeOut();
         $('.student').fadeOut();
         $('.campus').fadeOut();
+        $('.workshop').fadeOut();
         $('.schedule').fadeOut();
         $('.contact').fadeOut();
         $('.startup').fadeIn();
@@ -510,6 +543,7 @@
         $('.student').fadeOut();
         $('.startup').fadeout();
         $('.schedule').fadeOut();
+        $('.workshop').fadeOut();
         $('.contact').fadeOut();
         $('.schedule').fadeIn();
       });
@@ -518,6 +552,7 @@
         $('.student').fadeOut();
         $('.startup').fadeout();
         $('.schedule').fadeOut();
+        $('.workshop').fadeOut();
         $('.campus').fadeOut();
         $('.contact').fadeIn();
       });
@@ -526,8 +561,18 @@
         $('.student').fadeOut();
         $('.startup').fadeout();
         $('.schedule').fadeOut();
+        $('.workshop').fadeOut();
         $('.contact').fadeOut();
         $('.campus').fadeIn();
+      });
+      $('.workshop-panel').click(function() {
+        $('.profile').fadeOut();
+        $('.student').fadeOut();
+        $('.startup').fadeout();
+        $('.schedule').fadeOut();
+        $('.campus').fadeOut();
+        $('.contact').fadeOut();
+        $('.workshop').fadeIn();
       });
       
   </script>

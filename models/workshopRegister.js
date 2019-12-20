@@ -4,22 +4,21 @@ var passportLocalMongoose = require("passport-local-mongoose");
 
 
 var workshopRegisterSchema = new mongoose.Schema({
-  event_id : {
+  workshop_id : {
     type: String,
     required: true
   },
-  leader_id : {
-    type: String,
-    required: true
+  workshop_name : {
+    type : String,
+    required:true
   },
-  student_id : {
+  email : {
       type : String,
       required : true
   },
-  status : {
-      type : Boolean,
-      required : true,
-      default : false
+  name : {
+      type : String,
+      required : true
   },
   payment : {
       type : Boolean,
