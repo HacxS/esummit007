@@ -180,8 +180,6 @@ router.get('/dashboard-participate', middleware.ensureAuthenticated , (req,res) 
                   arr.push({ team_name : a.team_name, data : result2 });
                 }
                 if(i==len){
-                  
-                      console.log(result4);
                       res.render("participate", { user : req.user, registeredEvents : result, allteam : arr, registeredWorkshops : result4 });
                     
                   
@@ -224,14 +222,12 @@ router.post('/dashboard/workshop', middleware.ensureAuthenticated , (req,res) =>
   var name = req.user.first_name + req.user.last_name;
 
   WorkshopRegister.findOne({email : email}, (err, result) => {
-    console.log(result)
     if(!result){
       Workshop.findById(workshop_id, (er, rr) =>{
         if(er)res.send("Error");
         else{
           workshop_name = rr.name;
           var newWorkshopRegister = new WorkshopRegister({ workshop_id, workshop_name, name, email});
-          console.log(newWorkshopRegister)
           newWorkshopRegister.save().then(newWorkshopRegister => {
             req.flash('success_msg','You have registered this workshop');
             res.redirect('/dashboard-participate#workshop');
@@ -390,6 +386,7 @@ router.get("/tab",  function(req, res) {
 // Register
 router.post('/register', (req, res) => {
     const first_name = req.body.first_name;
+    console.log(req.body.startup);
     const last_name = req.body.last_name
     const email = req.body.email;
     const password = req.body.password;
@@ -398,7 +395,7 @@ router.post('/register', (req, res) => {
     const college = req.body.college;
     const city = req.body.city;
     var startup = req.body.startup;
-    if(startup == 1)startup = true;
+    if(startup == "1")startup = true;
     else startup = false;
     const referal_from = req.body.referal_from || null;
     let errors = [];
@@ -452,7 +449,7 @@ router.post('/register', (req, res) => {
             res.render('register', { errors, email, password });
           } 
           else {
-            var newUser = new User({ first_name, last_name, email, password, phone, college, city, referal_from });
+            var newUser = new User({ first_name, last_name, email, password, phone, college, city, referal_from, startup });
             bcrypt.genSalt(10, (err, salt) => {
               bcrypt.hash(newUser.password, salt, (err, hash) => {
                 if (err) throw err;
@@ -469,6 +466,11 @@ router.post('/register', (req, res) => {
       }
     }
   });
+
+  router.post('/tt', (req, res) => {
+    console.log(req.body.startup)
+    res.redirect('/tab')
+  })
 
 router.post('/login', (req, res, next) => {
     passport.authenticate('local', {
@@ -488,10 +490,9 @@ router.get("/logout",  function(req, res) {
 
 
 
-router.get("/dwwqdwd", (req, res) => {
+/* router.get("/dwwqdwd", (req, res) => {
   User.find({}, (err, result) => {
     var len = result.length;
-    console.log(len)
     var i =1;
     result.forEach(x => {
       if(!x.startup){
@@ -505,7 +506,7 @@ router.get("/dwwqdwd", (req, res) => {
       }
     });
   })
-})
+}) */
 
 
  module.exports = router;

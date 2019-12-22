@@ -113,10 +113,12 @@ tbody td{
               </a>
             
               <div class="dropdown-container ">
-                <a class="nav-link workshops">
-                  <i class="material-icons">events</i>
-                  <p>Student Events</p>
-                </a>
+                    <% if(user.startup == false){ %>
+                        <a class="nav-link workshops student-panel">
+                          <i class="material-icons">events</i>
+                          <p>Student Events</p>
+                        </a>
+                        <% } %>
                 <a class="nav-link workshops">
                   <i class="material-icons">events</i>
                   <p>Startup Events</p>
