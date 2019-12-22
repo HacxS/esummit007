@@ -1,95 +1,3 @@
-<!-- <section id="home" class="home-cover">
-        <div class="cover_slider owl-carousel owl-theme">
-            <div class="cover_item" style="height: 1159px;background: url('assets/img/bg/122.jpg'); min-height: 1000px;">
-                 <div class="slider_content">
-                    <div class="slider-content-inner">
-                        <div class="container" style="position: relative;   top: -133px;">
-                            <div style="max-width: 650px;" class="slider-content-center">
-                                
-                                    <form name="event-add-form" action="/dashboard/event" id="event-add-form" method="POST" >
-                                            Select your favorite fruit:
-                                            
-                                            <select id="mySelect" name="id">
-                                                <% events.forEach(x => { %>
-                                              <option value= <%= x._id %> ><%= x.name %></option>
-                                              <% }) %>                                            </select>
-                                              <input type="text" name="team_name" id="">
-
-                                              <button type="submit">Click</button>
-                                    </form>
-
-                                    
-                                    <% registeredEvents.forEach(t => { %>
-                                        <p><%= t.name %></p>
-
-                                        
-                                        <% if( t.status == false){ %>
-                                            <form id="add-member" method="get" action="/dashboard/accept-event/<%= t._id %>">
-                                            <button type="submit"> Accpet </button>
-                                            </form>
-                                            <form id="add-member" method="get" action="/dashboard/reject-event/<%= t._id %>">
-                                                <button type="submit"> Reject </button>
-                                            </form>
-
-                                            <% }else if( t.status == true){ %>
-                                                <form id="add-member" method="get" action="/dashboard/reject-event/<%= t._id %>">
-                                                    <button type="submit"> Delete </button>
-                                                </form>
-                                                    <% } %>
-
-                                                <% if(t.leader_id == user.email){ %>
-                                                    <p>Team</p>
-                                                    <% leaderEvents.forEach(o => { %>
-
-                                                        <% if(o.event_id == t.event_id && o.student_id != user.email ){ %>
-                                                            <p><%= o.student_id %></p>
-                                                            <form id="add-member" method="get" action="/dashboard/discard-event/<%= o._id %>">
-                                                                <button type="submit"> Delete </button>
-                                                            </form>
-                                                            <% } %>
-                                                    <% }) %>
-
-                                                            <br><br><br>
-                                                    
-
-                                                <% } %>
-                                                        
-
-                                        <%  }) %>
-
-
-
-                                        
-                                        <br>
-                                        <br>
-                                        <br>
-
-
-
-                                    <form id="add-member" method="post" action="/dashboard/add-member-event">
-                                            <select id="registeredEvents" name="event_id">
-                                                    <% registeredEvents.forEach(y => { %>
-                                                       <% if(user.email == y.leader_id){ %>
-                                                  <option value= <%= y.event_id %> ><%= y.name %></option>
-                                                  <% } %>
-                                                  <% }) %>                                         
-                                            </select>
-                                        <input type="text" name="email">
-                                        <button type="submit">Click</button>
-                                    </form> 
-
-                                    
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    
-    </section> -->
-
-
     <!DOCTYPE html>
 <html lang="en">
 
@@ -150,6 +58,9 @@
 .contact-panel:hover{
   cursor: pointer;
 }
+.profile-panel:hover{
+  cursor: pointer;
+}
   </style>
   
 </head>
@@ -201,11 +112,12 @@
                 </a>
               </div>
 
-              
+              <% if(user.startup == false){ %>
               <a class="nav-link workshops workshop-panel" >
                 <i class="material-icons">work</i>
                 <p>Workshops</p>
               </a>
+              <% } %>
 
 
             </div>
