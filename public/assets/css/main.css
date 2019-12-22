@@ -2298,7 +2298,7 @@ Cover
   transition: all 0.4s ease-in-out;
 }
 .icon_box_one i {
-  margin-top: -10px;
+  margin-top: 25px;
   padding: 0 15px;
   font-size: 72px;
   color: #f50136;
@@ -3155,6 +3155,7 @@ textarea.form-control {
 
 #events .project-menu ul {
     text-align: center;
+    padding: 0;
     margin-top: 34px;
     margin-bottom: 60px;
 }
@@ -3291,7 +3292,7 @@ textarea.form-control {
   height:350px;
   text-align: center;
   margin-top: 0;
-  padding: 10px 10px;
+  padding: 20px 10px;
 }
 .icon_box_one1 .content h4 {
   color: #ffffff;
