@@ -271,7 +271,7 @@ tbody td{
                         <form id="add-member" method="post" action="/dashboard/add-member-event/<%= t.event_id %>/<%= t.team_name%>">
                             <div class="form-group add-mem">
                                 <label for="exampleInputEmail1">Add  Member</label>
-                                <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
                                 <small id="emailHelp" class="form-text text-muted">Enter email id of your friend.</small>
                                 <button type="submit" class="btn btn-outline-light" >Add</button>
                             </div>
