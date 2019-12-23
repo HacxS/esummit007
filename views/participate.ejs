@@ -230,8 +230,9 @@ tbody td{
                                     </thead>
                                     <tbody>
                                     <% allteam.forEach(o => { %>
-                                        <% if(o.team_name == t.team_name){ %>
+                                        <% if(o.team_name == t.team_name ){ %>
                                             <% o.data.forEach(p => { %>
+                                              <% if(p.name == t.name){ %>
                                             <tr>
                                                 <td>
                                                     <% if(p.student_id == user.email){ %>
@@ -258,6 +259,7 @@ tbody td{
                                                 </td>
                                             <% } %>
                                             </tr>
+                                            <% } %>
                                             <% }) %>
                                             <!-- <p> <%= o.data.length %></p> -->
                                         <% } %>
@@ -268,7 +270,7 @@ tbody td{
                         </div> 
 
                         <% if(user.email == t.leader_id){ %>
-                        <form id="add-member" method="post" action="/dashboard/add-member-event/<%= t.event_id %>/<%= t.team_name%>">
+                        <form id="add-member" method="post" action="/dashboard/add-member-event/<%= t.event_id %>/<%= t.team_name%>/<%= t.name %>">
                             <div class="form-group add-mem">
                                 <label for="exampleInputEmail1">Add  Member</label>
                                 <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>

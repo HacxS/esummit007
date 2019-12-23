@@ -174,12 +174,14 @@ router.get('/dashboard-participate', middleware.ensureAuthenticated , (req,res) 
             var len = result.length;
             var i=1;
             result.forEach(a => {
-              EventRegister.find({ team_name : a.team_name}, (err2, result2) => {
+              EventRegister.find({ team_name : a.team_name, name: a.name}, (err2, result2) => {
                 if(err2)res.send("Error2");
                 else{
+                  console.log(result2)
                   arr.push({ team_name : a.team_name, data : result2 });
                 }
                 if(i==len){
+                  
                       res.render("participate", { user : req.user, registeredEvents : result, allteam : arr, registeredWorkshops : result4 });
                     
                   
@@ -243,14 +245,14 @@ router.post('/dashboard/workshop', middleware.ensureAuthenticated , (req,res) =>
   })
 });
 
-router.post('/dashboard/add-member-event/:id/:name', middleware.ensureAuthenticated , (req,res) => {
+router.post('/dashboard/add-member-event/:id/:name/:event_name', middleware.ensureAuthenticated , (req,res) => {
   var event_id = req.params.id;
   var leader_id = req.user.email;
   var student_id = req.body.email;
-  var name = null;
+  var name = req.body.event_name;
   var team_name = req.params.name;
   if(student_id != req.user.email){
-    EventRegister.find({ team_name : team_name}, (error, result2) => {
+    EventRegister.find({ team_name : team_name, name : name}, (error, result2) => {
       if(error)res.send("Error");
       else{
         if(result2.length >=4){
@@ -475,7 +477,7 @@ router.post('/register', (req, res) => {
 router.post('/login', (req, res, next) => {
     passport.authenticate('local', {
       successRedirect: '/dashboard',
-      failureRedirect: '/',
+      failureRedirect: '/login',
       failureFlash: true,
       successFlash: true,
       successMessage: "Yoyo"
