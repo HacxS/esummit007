@@ -1,0 +1,14 @@
+Blockchain technology is considered as one of the most popular catchphrases in recent times. The basic tenet of this platform is that it allows one to create a distributed and replicated ledger of events, transactions, and data generated through various IT processes with strong cryptographic guarantees of tamper resistance, immutability, and verifiability. Typically, Blockchain is a publicly verifiable, shared, immutable ledger for recording the history of transactions, where a block is a data structure that contains a set of transactions, a hash of the previous block, timestamp, and so on. The information that is recorded in the blockchain cannot be tampered with unnoticed, which makes the blockchain a trusted ledger, relying on different consensus protocols (e.g. proof-of-work, proof-of-stake).
+
+The Blockchain platform holds promise in various areas such as time stamping, logging of important events in a system, recording transactions, e-governance etc. The technology is being widely used in diverse industries such as Financial Services, Governance, healthcare, automobiles, media, travel, energy etc.
+
+Objectives of the Workshop is to disseminate of the knowledge of blockchain technology among students, researchers and academicians. The overarching goal is to create awareness and interest in this technology among students, and researchers. Trained manpower in this field is a growing necessity for the country.
+
+Major topics to be covered -
+- Fundamentals of Blockchain Technology
+- Key Elements of Blockchain
+- Public, Private and Consortium Blockchain
+- Smartcontracts
+- Consensus Mechanisms
+- IDE Remix Demo
+- Case Studies – Banking & Finance, Supply Chain, Healthcare  etc.
